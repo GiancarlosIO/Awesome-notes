@@ -12,7 +12,8 @@ const styles = {
     width: '100%',
     height: '80px',
     boxSizing: 'border-box',
-    paddingBottom: '10px'
+    paddingBottom: '10px',
+    boxShadow: '0 1px 2px rgba(0,0,0,0.2)'
   },
   hoverLink: {
     color: '#EB524A !important',
@@ -30,7 +31,7 @@ const styles = {
   }
 }
 
-const Header = () => {
+export const Header = () => {
   return (
     <header>
       <nav style={styles.base}>
@@ -46,7 +47,7 @@ const Header = () => {
           <Link path="/signup">
             Sign up
           </Link>
-          <Link path="/signup">
+          <Link path="/signin">
             Sign in
           </Link>
         </Column>

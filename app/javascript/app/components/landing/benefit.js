@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Radium from 'radium';
 
 const styles = {
@@ -35,20 +35,18 @@ const styles = {
   }
 }
 
-class Benefit extends Component {
-  render() {
-    const { title, paragraph } = this.props;
-    return (
-      <div style={styles.base}>
-        <h1 style={styles.title}>
-          { title }
-        </h1>
-        <p style={styles.paragraph}>
-          { paragraph }
-        </p>
-      </div>
-    )
-  }
+export const Benefit = (props) => {
+  const { title, paragraph } = props;
+  return (
+    <div style={styles.base} className="benefit__item">
+      <h1 style={styles.title}>
+        { title }
+      </h1>
+      <p style={styles.paragraph}>
+        { paragraph }
+      </p>
+    </div>
+  )
 }
 
 export default Radium()(Benefit);

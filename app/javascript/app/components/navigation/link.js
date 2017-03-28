@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Radium, { Style } from 'radium';
 import { NavLink } from 'react-router-dom';
 
@@ -24,26 +24,24 @@ const styles = {
   }
 }
 
-class Link extends Component {
-  render() {
-    const { path, exact, isActive, right, left, noStyles } = this.props;
-    let stylesObject = { ...styles.base };
-    stylesObject = right ?  { ...stylesObject, ...styles.right } : stylesObject;
-    stylesObject = left ? { ...stylesObject, ...styles.left } : stylesObject;
-    stylesObject = noStyles ? {} : stylesObject;
-    return (
-        <NavLink
-          to={path}
-          exact
-          style={stylesObject}
-          activeStyle={styles.active}
-          isActive={isActive}
-          className="nav__link"
-        >
-          { this.props.children }
-        </NavLink>
-    )
-  }
+export const Link = (props) => {
+  const { children, path, exact, isActive, right, left, noStyles } = props;
+  let stylesObject = { ...styles.base };
+  stylesObject = right ?  { ...stylesObject, ...styles.right } : stylesObject;
+  stylesObject = left ? { ...stylesObject, ...styles.left } : stylesObject;
+  stylesObject = noStyles ? {} : stylesObject;
+  return (
+      <NavLink
+        to={path}
+        exact
+        style={stylesObject}
+        activeStyle={styles.active}
+        isActive={isActive}
+        className="nav__link"
+      >
+        { children }
+      </NavLink>
+  )
 }
 
 export default Radium()(Link);

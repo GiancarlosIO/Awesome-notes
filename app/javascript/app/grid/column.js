@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Radium from 'radium';
 
 const styles = {
@@ -37,15 +37,13 @@ const styles = {
   }
 }
 
-class Column extends Component {
-  render() {
-    const { width, minWidth } = this.props;
-    return (
-      <div style={[styles.base, width && styles[width], minWidth && {minWidth: minWidth}]}>
-       { this.props.children }
-      </div>
-    )
-  }
+export const Column = (props) => {
+  const { children, width, minWidth, extraStyles } = props;
+  return (
+    <div style={[styles.base, width && styles[width], minWidth && {minWidth: minWidth}, extraStyles && {...extraStyles}]}>
+      { children }
+    </div>
+  )
 }
 
 export default Radium()(Column);

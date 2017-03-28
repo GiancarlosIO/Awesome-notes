@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Radium from 'radium';
 import Link from '../navigation/link';
 
@@ -17,19 +17,17 @@ const styles = {
   }
 }
 
-class NoFound extends Component {
-  render() {
-    return (
-      <div style={styles.base}>
-        <h1>404-NO MATCH</h1>
-        <div>
-          <Link path="/" noStyles>
-            Return to home
-          </Link>
-        </div>
+export const NoFound = (props) => {
+  return (
+    <div style={styles.base}>
+      <h1>404-NO MATCH</h1>
+      <div>
+        <Link path="/" noStyles>
+          Return to home
+        </Link>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Radium()(NoFound);

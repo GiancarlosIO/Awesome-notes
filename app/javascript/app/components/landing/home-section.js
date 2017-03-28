@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Radium from 'radium';
 import Column from '../../grid/column';
 
@@ -27,17 +27,15 @@ const styles = {
   }
 }
 
-class HomeSection extends Component {
-  render() {
-    return (
-      <Column width={10}>
-        <div style={styles.base}>
-          <h1 style={styles.title}>Awesome Notes App</h1>
-          <p style={styles.paragraph}>A simple note application for learning purposes...</p>
-        </div>
-      </Column>
-    )
-  }
+export const HomeSection = (props) => {
+  return (
+    <Column width={10}>
+      <div style={styles.base}>
+        <h1 style={styles.title}>Awesome Notes App</h1>
+        <p style={styles.paragraph}>A simple note application for learning purposes...</p>
+      </div>
+    </Column>
+  )
 }
 
 export default Radium()(HomeSection);

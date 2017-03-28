@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import jsdom from 'jsdom';
 import chai, { expect } from 'chai';
-import chaiJquery from 'chai-jquery';
+import chaiEnzyme from 'chai-enzyme';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -17,6 +17,5 @@ global.navigator = {
   userAgent: 'node.js'
 };
 const $ = _$(window);
-chaiJquery(chai, chai.util, $);
-
+chai.use(chaiEnzyme());
 export { expect } ;

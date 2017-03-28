@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Radium from 'radium';
 
 const styles = {
@@ -12,18 +12,21 @@ const styles = {
   },
   yCenter: {
     alignItems: 'center'
+  },
+  xCenter: {
+    justifyContent: 'center'
   }
 }
 
-class Container extends Component {
-  render() {
-    const { row, column, yCenter, extraStyles, bg } = this.props;
-    return (
-      <div style={[styles.base, extraStyles && extraStyles ,row && styles.row, yCenter && styles.yCenter, column && styles.column]}>
-        {this.props.children}
-      </div>
-    )
-  }
+export const Container = (props) => {
+  const { children, row, column, yCenter, xCenter, extraStyles } = props;
+  return (
+    <div
+      style={[styles.base, extraStyles && {...extraStyles} ,row && styles.row, yCenter && styles.yCenter, column && styles.column, xCenter && styles.xCenter]}
+    >
+      {children}
+    </div>
+  )
 }
 
 export default Radium()(Container);
