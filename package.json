@@ -1,5 +1,5 @@
 {
-  "name": "note-app",
+  "name": "awesome-app",
   "private": true,
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --require ./app/javascript/tests/test_helper.js --recursive ./app/javascript/tests/",
