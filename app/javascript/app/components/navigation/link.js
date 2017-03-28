@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const styles = {
   base: {
-    color: '#66CC99',
+    color: '#27D0B9',
     fontSize: '16x',
     textDecoration: 'none',
     display: 'block',
@@ -16,9 +16,8 @@ const styles = {
     transition: 'all 0.2s ease'
   },
   active: {
-    color: '#27AE60',
-    fontWeight: 'bold',
-    borderBottomColor: '#27AE60'
+    color: '#EB524A',
+    borderBottomColor: '#EB524A'
   },
   right: {
     alignSelf: 'flex-end'
@@ -27,10 +26,11 @@ const styles = {
 
 class Link extends Component {
   render() {
-    const { path, exact, isActive, right, left } = this.props;
+    const { path, exact, isActive, right, left, noStyles } = this.props;
     let stylesObject = { ...styles.base };
     stylesObject = right ?  { ...stylesObject, ...styles.right } : stylesObject;
     stylesObject = left ? { ...stylesObject, ...styles.left } : stylesObject;
+    stylesObject = noStyles ? {} : stylesObject;
     return (
         <NavLink
           to={path}

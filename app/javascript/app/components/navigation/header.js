@@ -9,18 +9,24 @@ const styles = {
     flexFlow: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    border: '1px solid black',
     width: '100%',
-    height: '60px',
+    height: '80px',
     boxSizing: 'border-box',
-
+    paddingBottom: '10px'
   },
   hoverLink: {
-    borderBottomColor: '#27AE60 !important'
+    color: '#EB524A !important',
+    borderBottomColor: '#EB524A !important'
   },
-  flexEnd: {
+  flexCenter: {
     flexFlow: 'row',
-    justifyContent: 'flex-end'
+    justifyContent: 'center'
+  },
+  logo: {
+    width: '200px',
+    height: '60px',
+    backgroundColor: '#432E41',
+    marginTop: '10px'
   }
 }
 
@@ -29,11 +35,14 @@ const Header = () => {
     <header>
       <nav style={styles.base}>
         <Column width={6}>
-          <Link path="/" exact left>
-            Logo
+          <Link path="/" exact noStyles>
+            <div className="logo" style={styles.logo}></div>
           </Link>
         </Column>
         <Column width={4} style={styles.flexEnd}>
+          <Link path="/">
+            Home
+          </Link>
           <Link path="/signup">
             Sign up
           </Link>
@@ -48,7 +57,7 @@ const Header = () => {
       />
       <Style
         scopeSelector="nav div:nth-child(2)"
-        rules= {styles.flexEnd}
+        rules= {styles.flexCenter}
       />
     </header>
   )
