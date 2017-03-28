@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
 // components
-
+import Landing from './landing/';
 // reducers
 
 // store
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <h1>Note app</h1>
+    <Landing />
     , document.getElementById('app-container')
   )
 })
