@@ -24,7 +24,7 @@ const styles = {
   }
 }
 
-export const Link = (props) => {
+export const LinkHeader = (props) => {
   const { children, path, exact, isActive, right, left, noStyles } = props;
   let stylesObject = { ...styles.base };
   stylesObject = right ?  { ...stylesObject, ...styles.right } : stylesObject;
@@ -44,4 +44,4 @@ export const Link = (props) => {
   )
 }
 
-export default Radium()(Link);
+export default Radium()(LinkHeader);

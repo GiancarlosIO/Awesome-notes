@@ -1,6 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
-import Link from '../navigation/link';
+import LinkHeader from '../navigation/link-header';
 
 const styles = {
   base: {
@@ -22,9 +22,9 @@ export const NoFound = (props) => {
     <div style={styles.base}>
       <h1>404-NO MATCH</h1>
       <div>
-        <Link path="/" noStyles>
+        <LinkHeader path="/" noStyles>
           Return to home
-        </Link>
+        </LinkHeader>
       </div>
     </div>
   )

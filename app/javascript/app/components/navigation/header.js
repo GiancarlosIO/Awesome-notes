@@ -1,6 +1,6 @@
 import React from 'react';
 import Radium, { Style } from 'radium';
-import Link from './link';
+import LinkHeader from './link-header';
 import Column from '../../grid/column';
 
 const styles = {
@@ -36,20 +36,20 @@ export const Header = () => {
     <header>
       <nav style={styles.base}>
         <Column width={6}>
-          <Link path="/" exact noStyles>
+          <LinkHeader path="/" exact noStyles>
             <div className="logo" style={styles.logo}></div>
-          </Link>
+          </LinkHeader>
         </Column>
         <Column width={4} style={styles.flexEnd}>
-          <Link path="/">
+          <LinkHeader path="/">
             Home
-          </Link>
-          <Link path="/signup">
+          </LinkHeader>
+          <LinkHeader path="/signup">
             Sign up
-          </Link>
-          <Link path="/signin">
+          </LinkHeader>
+          <LinkHeader path="/signin">
             Sign in
-          </Link>
+          </LinkHeader>
         </Column>
       </nav>
       <Style
