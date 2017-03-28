@@ -1,5 +1,11 @@
 import React from 'react';
+import Header from '../navigation/header';
 
 export default () => {
-  return (<h1>LANDING PAGE</h1>)
+  return (
+    <div>
+      <Header />
+      <div> Landing </div>
+    </div>
+  )
 }
