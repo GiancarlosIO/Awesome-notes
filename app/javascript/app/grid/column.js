@@ -39,9 +39,9 @@ const styles = {
 
 class Column extends Component {
   render() {
-    const { width } = this.props;
+    const { width, minWidth } = this.props;
     return (
-      <div style={[styles.base, width && styles[width]]}>
+      <div style={[styles.base, width && styles[width], minWidth && {minWidth: minWidth}]}>
        { this.props.children }
       </div>
     )
