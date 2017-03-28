@@ -7,7 +7,7 @@ import { LinkHeader } from '../../../app/components/navigation/link-header';
 import { Column } from '../../../app/grid/column';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 
 function debuComponent(wrapper) {
   let html = wrapper.html();
