@@ -34,7 +34,7 @@ const styles = {
 }
 
 export const Button = ({ type, bg, disabled, children }) => {
-    const isDisabled = disabled == undefined;
+    const isDisabled = disabled === undefined;
     return (
       <button style={[styles.base, styles[bg]]} type={type} disabled={isDisabled}>
         { children }
