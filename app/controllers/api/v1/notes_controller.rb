@@ -1,6 +1,6 @@
 class Api::V1::NotesController < Api::V1::MasterApiController
   before_action :authenticate_api_user!
-  before_action :set_note, only: [:show, :update, :delete]
+  before_action :set_note, only: [:show, :update, :destroy]
 
   def index
     @notes = current_api_user.notes
@@ -26,7 +26,7 @@ class Api::V1::NotesController < Api::V1::MasterApiController
     end
   end
 
-  def delete
+  def destroy
     if @note.destroy
       render json: { status: 'success' }, status: 200
     else
@@ -36,7 +36,7 @@ class Api::V1::NotesController < Api::V1::MasterApiController
 
   private
   def set_note
-    if Note.where(id: params[:id], user_id: current_api_user.id).nil?
+    if Note.where(id: params[:id], user_id: current_api_user.id).first.nil?
       render json: { status: "error", errors: ['Note not found'] }, status: 404
     else
       @note = Note.find(params[:id])

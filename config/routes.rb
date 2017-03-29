@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     end
     namespace :v1 do
       resources :notes
+      resources :tags, only: [:index, :create, :update, :destroy]
     end
   end
   get '*path', to: 'application#index'
