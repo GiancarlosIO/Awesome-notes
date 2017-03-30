@@ -1,7 +1,11 @@
 import React from 'react';
 import Radium, { Style } from 'radium';
+import { connect } from 'react-redux';
 import LinkHeader from './link-header';
 import Column from '../../grid/column';
+import signin from '../authentication/signin';
+import signup from '../authentication/signup';
+import notes from '../notes/index';
 
 const styles = {
   base: {
@@ -31,7 +35,25 @@ const styles = {
   }
 }
 
-export const Header = () => {
+export const Header = ({authenticated}) => {
+  const renderLinks = () => {
+    if (authenticated) {
+      return [
+          <LinkHeader path="/notes" key="1">
+            My Notes
+          </LinkHeader>
+      ]
+    } else {
+      return [
+        <LinkHeader path="/signup" key="1">
+            Sign up
+          </LinkHeader>,
+          <LinkHeader path="/signin" key="2">
+            Sign in
+          </LinkHeader>
+      ]
+    }
+  }
   return (
     <header>
       <nav style={styles.base}>
@@ -41,15 +63,10 @@ export const Header = () => {
           </LinkHeader>
         </Column>
         <Column width={4} style={styles.flexEnd}>
-          <LinkHeader path="/">
+          <LinkHeader path="/" key="1">
             Home
           </LinkHeader>
-          <LinkHeader path="/signup">
-            Sign up
-          </LinkHeader>
-          <LinkHeader path="/signin">
-            Sign in
-          </LinkHeader>
+         { renderLinks() }
         </Column>
       </nav>
       <Style
@@ -64,4 +81,12 @@ export const Header = () => {
   )
 }
 
-export default Radium()(Header);
+const HeaderRadium = Radium()(Header);
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated
+  }
+}
+
+export default connect(mapStateToProps)(HeaderRadium)
