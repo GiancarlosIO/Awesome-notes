@@ -4,7 +4,7 @@ import {
   UNAUTH_USER
 } from '../constants/';
 import {
-  setAuthApiHeaderConfig, 
+  setAuthApiHeaderConfig,
   getAuthApiHeaderConfig
 } from '../utils/apis/header-config';
 
@@ -19,11 +19,10 @@ export const signupUser = ({ email, password, password_confirmation }) => {
   return (dispatch, getState, AuthAPI) => {
     AuthAPI.signup(email, password, password_confirmation).request.then(
       (response) => {
-        window.authAPi = AuthAPI;
+        window.setAuthApiHeaderConfig = setAuthApiHeaderConfig;
         console.log('user register completed', response);
-        AuthAPI.setItemInLocalStorage(response.headers["access-token"], 'access-token');
         setAuthApiHeaderConfig(response.headers);
-        console.log('headers', getAuthApiHeaderConfig());
+        console.log('headers setted', getAuthApiHeaderConfig());
         dispatch(authUser());
       },
       (error) => { console.log(error) }

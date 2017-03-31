@@ -48,13 +48,3 @@ export const signout = () => {
     headers: getAuthApiHeaderConfig()
   })
 }
-
-// delete access-token in localStorage
-
-export const setItemInLocalStorage = (value, key) => {
-  localStorage.setItem(key, value);
-}
-
-export const deleteItemInLocalStorage = (key) => {
-  localStorage.removeItem(key);
-}

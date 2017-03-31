@@ -55,7 +55,7 @@ export const Header = ({authenticated, dispatch}) => {
             My Notes
           </LinkHeader>,
           <span style={styles.otherLink} key="2" onClick={signout}>
-            Signout
+            Sign out
           </span>
       ]
     } else {

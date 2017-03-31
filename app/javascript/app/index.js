@@ -21,8 +21,8 @@ const storeWithMiddleware = applyMiddleware(
 const store = storeWithMiddleware(storeConfig);
 
 // validate Session
-const token = localStorage.getItem('access-token');
-if (token) { store.dispatch({ type: AUTH_USER }) };
+const session = localStorage.getItem('session');
+if (session) { store.dispatch({ type: AUTH_USER }) };
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
