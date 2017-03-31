@@ -9,6 +9,7 @@ import RenderField from './render_field';
 import Button from '../../ui/buttons/button';
 import Header from '../navigation/header';
 import {Redirect} from 'react-router-dom';
+import { signupUser } from '../../actions/';
 
 const styles = {
   base: {
@@ -45,6 +46,7 @@ class Signup extends Component {
 
   onSubmit = (values, dispatch, formProps) => {
     console.log('submitting', values);
+    dispatch(signupUser(values));
   }
 
   render() {

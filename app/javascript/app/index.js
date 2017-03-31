@@ -10,9 +10,12 @@ import Routes from './routes/';
 // reducers
 import storeConfig from './reducers/';
 
+// Api
+import * as AuthAPI from './utils/apis/auth-api';
+
 // store
 const storeWithMiddleware = applyMiddleware(
-  ReduxThunk
+  ReduxThunk.withExtraArgument(AuthAPI)
 )(createStore);
 const store = storeWithMiddleware(storeConfig);
 

@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   authenticated: false,
-  error: '',
+  errors: {},
   user: null
 }
 
