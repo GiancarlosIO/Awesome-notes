@@ -6,6 +6,7 @@ import Column from '../../grid/column';
 import signin from '../authentication/signin';
 import signup from '../authentication/signup';
 import notes from '../notes/index';
+import { signoutUser } from '../../actions/';
 
 const styles = {
   base: {
@@ -32,16 +33,30 @@ const styles = {
     height: '60px',
     backgroundColor: '#432E41',
     marginTop: '10px'
+  },
+  otherLink: {
+    display: 'flex',
+    alignItems: 'center',
+    color: 'rgba(0,0,0,0.5)'
   }
 }
 
-export const Header = ({authenticated}) => {
+export const Header = ({authenticated, dispatch}) => {
+
+  const signout = () => {
+    console.log('sign out user');
+    //dispatch(signoutUser())
+  }
+
   const renderLinks = () => {
     if (authenticated) {
       return [
           <LinkHeader path="/notes" key="1">
             My Notes
-          </LinkHeader>
+          </LinkHeader>,
+          <span style={styles.otherLink} key="2" onClick={signout}>
+            Signout
+          </span>
       ]
     } else {
       return [

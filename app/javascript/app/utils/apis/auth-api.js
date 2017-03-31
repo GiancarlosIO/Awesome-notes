@@ -13,7 +13,7 @@ export const signup = (email, password, password_confirmation) => {
   let cancel;
   let request = axios({
     method: 'post',
-    headers: getAuthApiHeaderConfig,
+    headers: getAuthApiHeaderConfig(),
     url: BASE_URL,
     data: { email, password, password_confirmation },
     responseType: 'json',
@@ -29,7 +29,7 @@ export const signin = (email, password) => {
   let request = axios({
     method: 'post',
     url: `${BASE_URL}/sign_in`,
-    headers: getAuthApiHeaderConfig,
+    headers: getAuthApiHeaderConfig(),
     data: { email, password },
     responseType: 'json',
     cancelToken: new CancelToken( c => cancel = c )

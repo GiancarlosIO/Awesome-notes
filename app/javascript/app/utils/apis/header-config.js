@@ -8,7 +8,7 @@ let authApiHeaderConfig = {
 }
 
 // clean all values headers
-const resetAuthApiHeaderConfig = () => {
+export const resetAuthApiHeaderConfig = () => {
   authApiHeaderConfig["access-token"] = undefined;
   authApiHeaderConfig["client"] = undefined;
   authApiHeaderConfig["uid"] = undefined;
@@ -16,7 +16,7 @@ const resetAuthApiHeaderConfig = () => {
 }
 
 // set values to headers
-const setAuthApiHeaderConfig = (headerConfig) => {
+export const setAuthApiHeaderConfig = (headerConfig) => {
   authApiHeaderConfig["access-token"] = headerConfig["access-token"];
   authApiHeaderConfig["client"] = headerConfig.client;
   authApiHeaderConfig["uid"] = headerConfig.uid;
@@ -24,4 +24,11 @@ const setAuthApiHeaderConfig = (headerConfig) => {
 }
 
 // get authApiHeader
-const getAuthApiHeaderConfig = () => (authApiHeader);
+export const getAuthApiHeaderConfig = () => (authApiHeaderConfig);
+
+const HeaderConfig = {
+  resetAuthApiHeaderConfig,
+  setAuthApiHeaderConfig,
+  getAuthApiHeaderConfig
+}
+export default HeaderConfig;
