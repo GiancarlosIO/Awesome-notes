@@ -46,5 +46,6 @@ export const signout = () => {
     method: 'delete',
     url: `${BASE_URL}/sign_out`,
     headers: getAuthApiHeaderConfig()
-  })
+  });
+  return { request, cancel };
 }

@@ -8,6 +8,7 @@ import Container from '../../grid/container';
 import Column from '../../grid/column';
 import { validateSiginForm } from './form_validations';
 import Button from '../../ui/buttons/button';
+import { signinUser } from '../../actions/';
 
 const styles = {
   base: {
@@ -37,6 +38,14 @@ const styles = {
     fontFamily: 'open sans',
     color: '#27D0B9',
     fontSize: '24px'
+  },
+  error: {
+    backgroundColor: 'rgba(227, 0, 14, 0.2)',
+    color: '#E3000E',
+    fontSize: '12px',
+    padding: '5px 25px',
+    listStyle: 'none',
+    borderRadius: '4px'
   }
 }
 
@@ -44,6 +53,15 @@ class Signin extends Component {
 
   onSubmit = (values, dispatch, formProps) => {
     console.log('submitting', values);
+    dispatch(signinUser(values));
+  }
+
+  renderErrors = () => {
+    const { errors } = this.props;
+    if ( errors.length > 0) {
+      let errorsArray = errors.map((error, index) => (<li key={`error-${index}`}>{error}</li>));
+      return (<ul style={styles.error}>{errorsArray}</ul>)
+    }
   }
 
   render() {
@@ -55,6 +73,7 @@ class Signin extends Component {
           <Column width="4" minWidth="330px" extraStyles={styles.container}>
             <form onSubmit={handleSubmit(this.onSubmit)} style={styles.base}>
               <h2 style={styles.title}>Sign in</h2>
+              { this.renderErrors() }
               <Field
                 name="email"
                 type="email"
@@ -86,4 +105,11 @@ const SigininFormConfigured = reduxForm({
   form: 'signin',
   validate: validateSiginForm
 })(SigninFormRadium);
-export default connect()(SigininFormConfigured);
+
+function mapStateToProps(state) {
+  return {
+    errors: state.auth.errors
+  }
+}
+
+export default connect(mapStateToProps)(SigininFormConfigured);

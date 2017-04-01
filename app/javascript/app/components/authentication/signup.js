@@ -60,7 +60,7 @@ class Signup extends Component {
   renderErrors = () => {
     const { errors } = this.props;
     if (errors.length > 0) {
-      let errorsArray = errors.map( (error, index) => (<li key={`${error}-${index}`}>{error}</li>) );
+      let errorsArray = errors.map( (error, index) => (<li key={`error-${index}`}>{error}</li>) );
       return (<ul style={styles.error}>{errorsArray}</ul>);
     }
   }

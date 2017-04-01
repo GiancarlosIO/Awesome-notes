@@ -17,10 +17,10 @@ export const validateSignupForm = values => {
     errors.email = "Invalid email address";
   }
   if (!values.password) errors.password = "Enter a password";
-  if (!values.passwordConfirmation) {
-    errors.passwordConfirmation = 'Enter a password confirmation';
-  } else if (values.password !== values.passwordConfirmation) {
-    errors.passwordConfirmation = 'Password confirmation not match with password';
+  if (!values.password_confirmation) {
+    errors.password_confirmation = 'Enter a password confirmation';
+  } else if (values.password !== values.password_confirmation) {
+    errors.password_confirmation = 'Password confirmation not match with password';
   }
   return errors;
 }

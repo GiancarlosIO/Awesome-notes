@@ -24,9 +24,9 @@ const styles = {
     color: '#EB524A !important',
     borderBottomColor: '#EB524A !important'
   },
-  flexCenter: {
+  flexEnd: {
     flexFlow: 'row',
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
   logo: {
     width: '200px',
@@ -37,47 +37,58 @@ const styles = {
   otherLink: {
     display: 'flex',
     alignItems: 'center',
-    color: 'rgba(0,0,0,0.5)'
+    color: 'rgba(0,0,0,0.6)',
+    margin: '0 15px',
+    cursor: 'pointer'
+  },
+  signoutLink: {
+    fontSize: '12px',
+    color: 'rgba(0,0,0,0.4)',
+    ':hover': {
+      color: '#EB524A'
+    }
   }
 }
 
-export const Header = ({authenticated, dispatch}) => {
+export const Header = ({authenticated, user, dispatch}) => {
 
   const signout = () => {
-    console.log('sign out user');
-    //dispatch(signoutUser())
+    dispatch(signoutUser())
   }
 
   const renderLinks = () => {
-    if (authenticated) {
+    if (authenticated && user) {
       return [
           <LinkHeader path="/notes" key="1">
             My Notes
           </LinkHeader>,
-          <span style={styles.otherLink} key="2" onClick={signout}>
+          <span style={styles.otherLink} key="2">
+            { user.email }
+          </span>,
+          <span style={[styles.otherLink, styles.signoutLink]} key="3" onClick={signout}>
             Sign out
           </span>
       ]
     } else {
       return [
         <LinkHeader path="/signup" key="1">
-            Sign up
-          </LinkHeader>,
-          <LinkHeader path="/signin" key="2">
-            Sign in
-          </LinkHeader>
+          Sign up
+        </LinkHeader>,
+        <LinkHeader path="/signin" key="2">
+          Sign in
+        </LinkHeader>
       ]
     }
   }
   return (
     <header>
       <nav style={styles.base}>
-        <Column width={6}>
+        <Column width={4}>
           <LinkHeader path="/" exact noStyles>
             <div className="logo" style={styles.logo}></div>
           </LinkHeader>
         </Column>
-        <Column width={4} style={styles.flexEnd}>
+        <Column width={6}>
           <LinkHeader path="/" key="1">
             Home
           </LinkHeader>
@@ -90,7 +101,7 @@ export const Header = ({authenticated, dispatch}) => {
       />
       <Style
         scopeSelector="nav div:nth-child(2)"
-        rules= {styles.flexCenter}
+        rules= {styles.flexEnd}
       />
     </header>
   )
@@ -100,7 +111,8 @@ const HeaderRadium = Radium()(Header);
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    user: state.auth.user
   }
 }
 
