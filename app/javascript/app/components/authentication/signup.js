@@ -9,6 +9,7 @@ import RenderField from './render_field';
 import Button from '../../ui/buttons/button';
 import Header from '../navigation/header';
 import {Redirect} from 'react-router-dom';
+import { signupUser } from '../../actions/';
 
 const styles = {
   base: {
@@ -38,6 +39,14 @@ const styles = {
     fontFamily: 'open sans',
     color: '#27D0B9',
     fontSize: '24px'
+  },
+  error: {
+    backgroundColor: 'rgba(227, 0, 14, 0.2)',
+    color: '#E3000E',
+    fontSize: '12px',
+    padding: '5px 25px',
+    listStyle: 'none',
+    borderRadius: '4px'
   }
 }
 
@@ -45,6 +54,15 @@ class Signup extends Component {
 
   onSubmit = (values, dispatch, formProps) => {
     console.log('submitting', values);
+    dispatch(signupUser(values));
+  }
+
+  renderErrors = () => {
+    const { errors } = this.props;
+    if (errors.length > 0) {
+      let errorsArray = errors.map( (error, index) => (<li key={`error-${index}`}>{error}</li>) );
+      return (<ul style={styles.error}>{errorsArray}</ul>);
+    }
   }
 
   render() {
@@ -56,6 +74,7 @@ class Signup extends Component {
           <Column width="4" minWidth="330px" extraStyles={styles.container}>
             <form onSubmit={handleSubmit(this.onSubmit)} style={styles.base}>
               <h2 style={styles.title}>Sign up now!</h2>
+              { this.renderErrors() }
               <Field
                 name="email"
                 type="email"
@@ -69,7 +88,7 @@ class Signup extends Component {
                 label="Password"
               />
               <Field
-                name="passwordConfirmation"
+                name="password_confirmation"
                 type="password"
                 component={RenderField}
                 label="Passsword confirmation"
@@ -92,4 +111,10 @@ const SignupFormConfigured = reduxForm({
   validate: validateSignupForm
 })(Signup)
 
-export default connect()(SignupFormConfigured);
+function mapStateToProps(state) {
+  return {
+    errors: state.auth.errors
+  }
+}
+
+export default connect(mapStateToProps)(SignupFormConfigured);
