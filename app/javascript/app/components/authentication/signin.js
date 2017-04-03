@@ -51,9 +51,16 @@ const styles = {
 
 class Signin extends Component {
 
+  state = {
+    loading: false
+  }
+
   onSubmit = (values, dispatch, formProps) => {
     console.log('submitting', values);
-    dispatch(signinUser(values));
+    this.setState({loading: true}, () => {
+      dispatch(signinUser(values))
+          .catch(() => { this.setState({loading: false}) });
+    })
   }
 
   renderErrors = () => {
@@ -87,7 +94,7 @@ class Signin extends Component {
                 label="Password"
               />
               <div style={styles.buttonContainer}>
-                <Button type="submit" bg="secondary" disabled={ pristine || submitting }>
+                <Button type="submit" bg="secondary" disabled={ this.state.loading }>
                   Sign in
                 </Button>
               </div>

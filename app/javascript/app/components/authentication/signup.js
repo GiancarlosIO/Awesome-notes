@@ -52,9 +52,16 @@ const styles = {
 
 class Signup extends Component {
 
+  state = {
+    loading: false
+  }
+
   onSubmit = (values, dispatch, formProps) => {
     console.log('submitting', values);
-    dispatch(signupUser(values));
+    this.setState({loading: true}, () => {
+      dispatch(signupUser(values))
+        .catch(() => this.setState({loading: false}));
+    })
   }
 
   renderErrors = () => {
@@ -94,7 +101,7 @@ class Signup extends Component {
                 label="Passsword confirmation"
               />
               <div style={styles.buttonContainer}>
-                <Button type="submit" bg="primary" disabled={ pristine || submitting }>
+                <Button type="submit" bg="primary" disabled={ this.state.loading }>
                   Register
                 </Button>
               </div>

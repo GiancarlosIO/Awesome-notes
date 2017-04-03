@@ -33,10 +33,9 @@ const styles = {
   }
 }
 
-export const Button = ({ type, bg, disabled, children }) => {
-    const isDisabled = disabled === undefined;
+export const Button = ({ type, bg, children, disabled }) => {
     return (
-      <button style={[styles.base, styles[bg]]} type={type} disabled={isDisabled}>
+      <button style={[styles.base, styles[bg]]} type={type} disabled={disabled}>
         { children }
       </button>
     )

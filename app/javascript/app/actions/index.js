@@ -21,7 +21,7 @@ export const setUserData = (userData) => ({ type: SET_USER_DATA, payload: userDa
 export const signupUser = ({ email, password, password_confirmation }) => {
   console.log(email, password, password_confirmation);
   return (dispatch, getState, AuthAPI) => {
-    AuthAPI.signup(email, password, password_confirmation).request.then(
+    return AuthAPI.signup(email, password, password_confirmation).request.then(
       (response) => {
         console.log('user register completed', response);
         setAuthApiHeaderConfig(response.headers, response.data.data);
@@ -32,6 +32,7 @@ export const signupUser = ({ email, password, password_confirmation }) => {
       (error) => {
         console.log('error to register', error.reponse)
         dispatch(authError(error.response.data.errors.full_messages));
+        return Promise.reject();
       }
     )
   }
@@ -40,7 +41,7 @@ export const signupUser = ({ email, password, password_confirmation }) => {
 // Sign users
 export const signinUser = ({email, password}) => {
   return (dispatch, getState, AuthAPI) => {
-    AuthAPI.signin(email, password).request.then(
+    return AuthAPI.signin(email, password).request.then(
       (response) => {
         resetAuthApiHeaderConfig();
         setAuthApiHeaderConfig(response.headers, response.data.data);
@@ -51,6 +52,7 @@ export const signinUser = ({email, password}) => {
       ( error ) => {
         console.log('error to signin', error.response);
         dispatch(authError(error.response.data.errors));
+        return Promise.reject();
       }
     )
   }

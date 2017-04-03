@@ -71,11 +71,11 @@ export const Header = ({authenticated, user, dispatch}) => {
       ]
     } else {
       return [
-        <LinkHeader path="/signup" key="1">
-          Sign up
-        </LinkHeader>,
         <LinkHeader path="/signin" key="2">
           Sign in
+        </LinkHeader>,
+        <LinkHeader path="/signup" key="1">
+          Create an account
         </LinkHeader>
       ]
     }
