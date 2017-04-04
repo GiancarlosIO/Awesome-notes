@@ -45,7 +45,8 @@ export const signout = () => {
   let request = axios({
     method: 'delete',
     url: `${BASE_URL}/sign_out`,
-    headers: getAuthApiHeaderConfig()
+    headers: getAuthApiHeaderConfig(),
+    responseType: 'json'
   });
   return { request, cancel };
 }

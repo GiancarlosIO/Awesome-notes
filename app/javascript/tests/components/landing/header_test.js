@@ -36,7 +36,7 @@ describe('Header', () => {
   });
   it('contain a Sign up and Sign In links text', () => {
     expect(wrapper.text()).to.contain('Home');
-    expect(wrapper.text()).to.contain('Sign up');
+    expect(wrapper.text()).to.contain('Create an account');
     expect(wrapper.text()).to.contain('Sign in');
   })
 })

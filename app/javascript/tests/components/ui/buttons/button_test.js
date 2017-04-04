@@ -14,7 +14,7 @@ chai.use(chaiEnzyme(debugComponent));
 describe('Button', () => {
   it('render a button disabled', () => {
     const wrapper = render(
-      <ButtonRadium isDisabled type="button" bg="default">
+      <ButtonRadium disabled={true} type="button" bg="default">
         Sample button
       </ButtonRadium>
     );
