@@ -10,6 +10,7 @@ import AuthAPI from '../../../app/utils/apis/auth-api';
 import { Field } from 'redux-form';
 import { reducer as formReducer } from 'redux-form';
 import sinon from 'sinon';
+import { createStore, combineReducers } from 'redux';
 
 import SignupConnected, { Signup } from '../../../app/components/authentication/signup';
 import RenderField from '../../../app/components/authentication/render_field';
@@ -76,9 +77,53 @@ describe('signup component', () => {
       errors = ['password not match'];
       const wrapper = buildSubject();
       expect(wrapper.find('form').find('ul').html()).to.contain('password not match');
-    })
+    });
   });
   describe('integration test', () => {
-    
+      let store, onSave, subject, errors = [];
+    beforeEach(() => {
+      store = createStore(combineReducers({ form: formReducer, auth: (state) => ({errors: []}) }));
+      onSave =sinon.stub().returns(Promise.resolve());
+      const props = {
+        onSave,
+        errors
+      };
+      subject = mount(
+        <MemoryRouter>
+          <Provider store={store}>
+            <SignupConnected {...props}/>
+          </Provider>
+        </MemoryRouter>
+      );
+    });
+    it('should show errors when fields are submitting in blank', () => {
+      subject.find('form').simulate('submit');
+      const htmlForm = subject.find('form').html();
+      expect(htmlForm).to.contain('Enter a email');
+      expect(htmlForm).to.contain('Enter a password');
+      expect(htmlForm).to.contain('Enter a password confirmation');
+    });
+    it('should show a error when email is invalid', () => {
+      const input = subject.find('form').find('input[name="email"]');
+      input.simulate('change', {
+        target: { value: 'invalid email' }
+      });
+      subject.find('form').simulate('submit');
+      const htmlForm = subject.find('form').html();
+      expect(htmlForm).to.contain('Invalid email address');
+    });
+    it('should show a error when password and password confirmation not match', () => {
+      const passwordField = subject.find('form').find('input[name="password"]');
+      const passwordConfirmationField = subject.find('form').find('input[name="password_confirmation"]');
+      passwordField.simulate('change', {
+        target: { value: '123123123' }
+      });
+      passwordConfirmationField.simulate('change', {
+        target: { value: '123123123123' }
+      });
+      subject.find('form').simulate('submit');
+      const htmlForm = subject.find('form').html();
+      expect(htmlForm).to.contain('Password confirmation not match with password');
+    })
   })
 });
