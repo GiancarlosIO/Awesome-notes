@@ -49,7 +49,7 @@ const styles = {
   }
 }
 
-class Signin extends Component {
+export class Signin extends Component {
 
   state = {
     loading: false
