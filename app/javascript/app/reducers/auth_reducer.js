@@ -24,7 +24,6 @@ export default function(state = initialState, action) {
     case UNAUTH_USER:
       return { ...state, errors: [], authenticated: false };
     case SET_USER_DATA:
-      console.log('set_user_data', action.payload)
       return { ...state, user: action.payload, errors: [] };
     default:
       return state;
