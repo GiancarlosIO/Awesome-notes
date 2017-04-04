@@ -50,7 +50,7 @@ const styles = {
   }
 }
 
-class Signup extends Component {
+export class Signup extends Component {
 
   state = {
     loading: false
