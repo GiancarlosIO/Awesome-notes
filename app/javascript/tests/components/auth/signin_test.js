@@ -7,8 +7,12 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { createStore, combineReducers } from 'redux';
 import sinon from 'sinon';
+import ReduxThunk from 'redux-thunk';
+import configureMockStore from 'redux-mock-store';
+import nock from 'nock';
+import * as AuthAPI from '../../../app/utils/apis/auth-api';
 
-import SigninConnected from '../../../app/components/authentication/signin';
+import SigninConnected, { Signin } from '../../../app/components/authentication/signin';
 
 describe('signin component', () => {
   let errors = [];
@@ -21,7 +25,7 @@ describe('signin component', () => {
     const wrapper = mount(
       <MemoryRouter>
         <Provider store={store}>
-          <SigninConnected {...props}/>
+          <SigninConnected {...props} dispatch={store.dispatch}/>
         </Provider>
       </MemoryRouter>
     );
@@ -53,5 +57,30 @@ describe('signin component', () => {
     const wrapper = renderComponent();
     const wrapperHtml = wrapper.find('form').html();
     expect(wrapperHtml).to.contain('Invalid credentials');
+  });
+  it('should call a action to submit the form', () => {
+    const middlewares = [ ReduxThunk.withExtraArgument(AuthAPI) ];
+    const mockstore = configureMockStore(middlewares);
+    const store = mockstore({ form: formReducer, auth: {user: null, errors: []} });
+    const onSubmit= sinon.spy();
+    const wrapper = mount(
+      <MemoryRouter>
+        <Provider store={store}>
+          <SigninConnected handleSubmit={onSubmit}/>
+        </Provider>
+      </MemoryRouter>
+    );
+    // Initial actions called of redux form
+
+    const emailField = wrapper.find('form').find('input[name="email"]');
+    const passwordField = wrapper.find('form').find('input[name="password"]');
+    emailField.simulate('change', {
+      target: { data: {id: 1} }
+    });
+    passwordField.simulate('change', {
+      target: { value: '123123123' }
+    });
+    wrapper.find('form').simulate('submit');
+    expect(onSubmit.calledOnce).to.equal(true);
   });
 });
