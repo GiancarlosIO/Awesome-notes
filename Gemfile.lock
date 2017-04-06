@@ -95,6 +95,8 @@ GEM
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
+    font-awesome-rails (4.6.3.1)
+      railties (>= 3.2, < 5.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     hashie (3.5.5)
@@ -224,6 +226,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise_token_auth
+  font-awesome-rails
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   omniauth-facebook
@@ -241,4 +244,4 @@ DEPENDENCIES
   webpacker!
 
 BUNDLED WITH
-   1.13.6
+   1.14.6
