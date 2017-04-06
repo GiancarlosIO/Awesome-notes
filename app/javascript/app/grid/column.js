@@ -38,9 +38,9 @@ const styles = {
 }
 
 export const Column = (props) => {
-  const { children, width, minWidth, extraStyles } = props;
+  const { children, width, minWidth, maxWidth, extraStyles } = props;
   return (
-    <div style={[styles.base, width && styles[width], minWidth && {minWidth: minWidth}, extraStyles && {...extraStyles}]}>
+    <div style={[styles.base, width && styles[width], minWidth && {minWidth: minWidth}, maxWidth && {maxWidth: maxWidth}, extraStyles && {...extraStyles}]}>
       { children }
     </div>
   )
