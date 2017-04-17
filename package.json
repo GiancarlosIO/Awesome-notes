@@ -1,5 +1,10 @@
 {
   "name": "awesome-app",
+  "version": "1.0.0",
+  "description": "A simple note app for learning purposes built with rails, react and redux",
+  "repository": "https://github.com/GiancarlosIO/Awesome-notes",
+  "author": "Giancarlos Isasi Oyolo",
+  "license": "ISC",
   "private": true,
   "scripts": {
     "test": "NODE_ENV=test mocha -r mock-local-storage --compilers js:babel-core/register --require ./app/javascript/tests/test_helper.js --recursive ./app/javascript/tests/",
@@ -31,9 +36,10 @@
     "postcss-loader": "^1.3.3",
     "postcss-smart-import": "^0.6.10",
     "precss": "^1.4.0",
+    "prop-types": "^15.5.8",
     "radium": "^0.18.2",
     "rails-erb-loader": "^3.2.0",
-    "react": "^15.4.2",
+    "react": "^15.5.4",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",

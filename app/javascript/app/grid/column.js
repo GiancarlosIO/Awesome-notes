@@ -3,7 +3,8 @@ import Radium from 'radium';
 
 const styles = {
   base: {
-    display: 'flex'
+    display: 'flex',
+    boxSizing: 'border-box'
   },
   1: {
     width: '10%'
