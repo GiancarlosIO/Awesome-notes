@@ -26,8 +26,11 @@ const styles = {
 
 const Icon = ({type, title, extraStyles, handleClick}) =>
   (
-    <div style={[styles.base, extraStyles && {...extraStyles}]} title={title} onClick={handleClick}>
-      <i className={`fa fa-${type}`} />
+    <div
+      style={[styles.base, extraStyles && {...extraStyles}]}
+      title={title}
+      onClick={handleClick}>
+        <i className={`fa fa-${type}`} />
     </div>
   )
 

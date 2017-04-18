@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   all: {},
-  noteSelected: {},
+  noteSelected: null,
   tags: [],
   searchText: null
 }

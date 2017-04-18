@@ -34,7 +34,7 @@ export class BodyNote extends Component {
         style={styles.base}
         onChange={this.handleOnChange}
         ref={ (el) => {this.textarea = el;} }
-        value={noteSelected.text ? noteSelected.text : ''}
+        value={noteSelected ? noteSelected.text : ''}
         />
     )
   }

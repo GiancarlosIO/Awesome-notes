@@ -8,6 +8,11 @@ import {
 } from '../constants/';
 
 import {
+  unauthUser
+} from './auth-user'
+
+import {
+  resetAuthApiHeaderConfig,
   setAuthApiHeaderConfig
 } from '../utils/apis/header-config';
 
@@ -22,13 +27,18 @@ export const fetchNotesFromApi = () => {
   return (dispatch, getState, { NoteAPI }) => {
     return NoteAPI.fetchNotes().request.then(
       (response) => {
-        setAuthApiHeaderConfig(response.headers, undefined);
         let objNotes = {};
         response.data.notes.forEach( note => objNotes[`${note.id}`] = note );
         dispatch(fetchNotes(objNotes));
         console.log('fetch notes', response);
       },
-      (error) => { console.log('error to fetch notes', error.response); }
+      (error) => {
+        console.log('error to fetch notes', error.response);
+        if (error.response.status === 401) {
+          resetAuthApiHeaderConfig();
+          dispatch(unauthUser());
+        }
+      }
     )
   }
 }
@@ -37,12 +47,47 @@ export const addNoteFromApi = (text) => {
   return (dispatch, getState, { NoteAPI }) => {
     return NoteAPI.addNote(text).request.then(
       (response) => {
-        setAuthApiHeaderConfig(response.headers, undefined);
         dispatch(addNote(response.data.note));
         dispatch(selectNote(response.data.note.id));
         console.log('added note', response);
       },
-      (error) => { console.log('error to add a note', error.response); }
+      (error) => {
+        console.log('error to add a note', error.response);
+        if (error.response.status === 401) {
+          resetAuthApiHeaderConfig();
+          dispatch(unauthUser());
+        }
+      }
+    )
+  }
+}
+
+export const deleteNoteFromApi = (noteId) => {
+  return (dispatch, getState, { NoteAPI }) => {
+    return NoteAPI.deleteNote(noteId).request.then(
+      (response) => {
+        const notes = getState().notes.all;
+        const keys = Object.keys(notes);
+        let noteIndex = keys.findIndex( index => index == noteId );
+        if (keys.length > 1 ) {
+          if (notes[keys[noteIndex + 1]]) {
+            dispatch(selectNote(notes[keys[noteIndex + 1]].id));
+          } else {
+            dispatch(selectNote(notes[keys[0]].id));
+          };
+        } else if ( keys.length === 1 ) {
+          dispatch(selectNote(null));
+        }
+        dispatch(deleteNote(noteId));
+        console.log('note deleted', response);
+      },
+      (error) => {
+        console.log('error to delete the note', error.response);
+        if (error.response.status === 401) {
+          resetAuthApiHeaderConfig();
+          dispatch(unauthUser());
+        }
+      }
     )
   }
 }

@@ -23,9 +23,10 @@ export class ListNote extends Component {
   }
 
   renderNotes = () => {
-    const { notes, noteSelectedId } = this.props;
+    const { notes, noteSelected } = this.props;
     const notesArray = Object.keys(notes).map( index => {
       let noteElement = notes[index];
+      const noteSelectedId = noteSelected ? noteSelected.id : undefined;
       return (
         <Column width="10" key={noteElement.id} extraStyles={{height: '40px'}}>
           <Note {...noteElement} handleSelectNote={this.selectNote} selected={noteSelectedId === noteElement.id}/>
@@ -47,7 +48,7 @@ export class ListNote extends Component {
 function mapStateToProps(state) {
   return {
     notes: getFilteredNotes(state),
-    noteSelectedId: state.notes.noteSelected.id
+    noteSelected: state.notes.noteSelected
   }
 };
 
