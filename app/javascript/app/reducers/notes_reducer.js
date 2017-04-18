@@ -3,13 +3,15 @@ import {
   ADD_NOTE,
   UPDATE_NOTE,
   DELETE_NOTE,
-  SELECT_NOTE
+  SELECT_NOTE,
+  SET_SEARCH_TEXT
 } from '../constants/';
 
 const initialState = {
   all: {},
   noteSelected: {},
-  tags: []
+  tags: [],
+  searchText: null
 }
 
 export default function(state = initialState, action) {
@@ -48,6 +50,11 @@ export default function(state = initialState, action) {
         ...state,
         noteSelected: state.all[action.payload]
       };
+    case SET_SEARCH_TEXT:
+      return {
+        ...state,
+        searchText: action.payload
+      }
     default:
       return state;
   }
