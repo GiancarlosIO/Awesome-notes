@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
 
 const styles = {
   base: {
@@ -30,8 +31,8 @@ const Icon = ({type, title, extraStyles, handleClick}) =>
     </div>
   )
 
-Icon.Proptypes = {
-  type: React.PropTypes.string.isRequired
+Icon.proptypes = {
+  type: PropTypes.string.isRequired
 }
 
 export default Radium()(Icon);

@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
 
 const styles = {
   base: {
@@ -45,6 +46,13 @@ export const Column = (props) => {
       { children }
     </div>
   )
+}
+
+Column.propTypes = {
+  width: PropTypes.string,
+  minWidth: PropTypes.string,
+  maxWidth: PropTypes.string,
+  extraStyles: PropTypes.object
 }
 
 export default Radium()(Column);

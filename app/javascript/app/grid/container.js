@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
 
 const styles = {
   base: {
@@ -38,6 +39,14 @@ export const Container = (props) => {
       {children}
     </div>
   )
+}
+
+Container.propTypes = {
+  row: PropTypes.bool,
+  column: PropTypes.bool,
+  xCenter: PropTypes.bool,
+  noPadding: PropTypes.bool,
+  extraStyles: PropTypes.object
 }
 
 export default Radium()(Container);

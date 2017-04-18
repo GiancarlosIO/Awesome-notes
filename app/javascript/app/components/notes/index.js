@@ -7,6 +7,8 @@ import Column from '../../grid/column';
 import SearchBar from './search-bar';
 import AddNote from './add-note';
 import Menu from './menu';
+import ListNote from './list-note';
+import Note from './note';
 
 const styles = {
   baseColumn: {
@@ -51,7 +53,7 @@ class NotesMain extends Component {
         </Container>
         <Container noPadding extraStyles={styles.fullHeight}>
           <Column width="2" minWidth="250px" extraStyles={{...styles.borderLeftRight, ...styles.borderBottom}}>
-            <h1>NOTES</h1>
+            <ListNote />
           </Column>
           <Column width="8" minWidth="900px" extraStyles={{...styles.borderRight, ...styles.borderBottom}}>
             <h1>TEXT BODY</h1>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
 
 const styles = {
   container: {
@@ -93,8 +94,8 @@ export const RenderField = (props) => {
   )
 }
 
-RenderField.PropTypes = {
-  type: React.PropTypes.string.isRequired
+RenderField.propTypes = {
+  type: PropTypes.string.isRequired
 }
 
 export default Radium()(RenderField);
