@@ -3,7 +3,8 @@ import {
   ADD_NOTE,
   DELETE_NOTE,
   UPDATE_NOTE,
-  SELECT_NOTE
+  SELECT_NOTE,
+  SET_SEARCH_TEXT
 } from '../constants/';
 
 import {
@@ -15,6 +16,7 @@ export const addNote = (note) => ({ type: ADD_NOTE, payload: note });
 export const deleteNote = (noteId) => ({ type: DELETE_NOTE, payload: noteId });
 export const updateNote = (note) => ({ type: UPDATE_NOTE, payload: note });
 export const selectNote = (note) => ({ type: SELECT_NOTE, payload: note });
+export const setSearchText = (text) => ({ type: SET_SEARCH_TEXT, payload: text })
 
 export const fetchNotesFromApi = () => {
   return (dispatch, getState, { NoteAPI }) => {
