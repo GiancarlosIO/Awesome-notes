@@ -27,16 +27,30 @@ export class BodyNote extends Component {
       console.log('value of textarea', val);
     }
 
+  componentDidMount() {
+    if (this.props.noteSelected) {
+      this.textarea.focus();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.noteSelected) {
+      this.textarea.focus();
+    }
+  }
+
   render() {
     const { noteSelected } = this.props;
-    return (
-      <textarea
-        style={styles.base}
-        onChange={this.handleOnChange}
-        ref={ (el) => {this.textarea = el;} }
-        value={noteSelected ? noteSelected.text : ''}
-        />
-    )
+    return noteSelected ?
+      (
+        <textarea
+          style={styles.base}
+          onChange={this.handleOnChange}
+          ref={ (el) => {this.textarea = el;} }
+          value={noteSelected ? noteSelected.text : ''}
+          />
+      ) :
+      null
   }
 }
 

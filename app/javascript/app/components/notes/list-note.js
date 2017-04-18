@@ -11,8 +11,8 @@ import Note from './note';
 export class ListNote extends Component {
 
   selectNote = (id) => {
-    const { noteSelectedId } = this.props;
-    if (id !== noteSelectedId ) {
+    const { noteSelected } = this.props;
+    if (id !== noteSelected.id ) {
       this.props.dispatch(selectNote(id));
       console.log('noteId selected', id);
     }
