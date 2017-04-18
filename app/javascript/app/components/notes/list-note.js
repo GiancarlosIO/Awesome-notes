@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Container from '../../grid/container';
 import Column from '../../grid/column';
 import { fetchNotesFromApi, selectNote } from '../../actions/notes';
+import { getFilteredNotes } from '../../selectors/';
 
 import Note from './note';
 
@@ -36,7 +37,7 @@ export class ListNote extends Component {
 
   render() {
     return (
-      <Container width="10" noPadding extraStyles={{justifyContent: 'flex-start'}}>
+      <Container width="10" noPadding extraStyles={{justifyContent: 'flex-start', flexFlow: 'column'}}>
         { this.renderNotes() }
       </Container>
     )
@@ -45,7 +46,7 @@ export class ListNote extends Component {
 
 function mapStateToProps(state) {
   return {
-    notes: state.notes.all,
+    notes: getFilteredNotes(state),
     noteSelectedId: state.notes.noteSelected.id
   }
 };

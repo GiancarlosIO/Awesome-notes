@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Radium from 'radium';
 import Container from '../../grid/container';
 import Column from '../../grid/column';
+import { setSearchText } from '../../actions/notes';
 
 const styles =  {
   base: {
@@ -22,12 +23,33 @@ const styles =  {
 }
 
 export class SearchBar extends Component {
+
+  handleChange = () => {
+    const text = this.inputText.value;
+    if (text.length > 0) {
+      this.props.dispatch(setSearchText(text));
+    } else {
+      this.props.dispatch(setSearchText(null));
+    }
+  }
+
   render() {
+    const { searchText } = this.props;
     return (
-      <input type="text" placeholder="Seach notes" style={styles.base}/>
+      <input
+        ref={ (el) => {this.inputText = el;} }
+        type="text"
+        placeholder="Seach notes"
+        style={styles.base}
+        onChange={this.handleChange}
+        value={ searchText }
+      />
     )
   }
 }
 
 const SearchBarRadium = Radium()(SearchBar);
+
+const mapStateToProps = (state) => ({ searchText: state.notes.searchText })
+
 export default connect()(SearchBarRadium);
