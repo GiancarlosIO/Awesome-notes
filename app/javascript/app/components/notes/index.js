@@ -9,6 +9,7 @@ import AddNote from './add-note';
 import Menu from './menu';
 import ListNote from './list-note';
 import Note from './note';
+import BodyNote from './body-note';
 
 const styles = {
   baseColumn: {
@@ -35,10 +36,13 @@ const styles = {
   },
   fullHeight: {
     height: 'calc(100vh - 80px)'
+  },
+  noWrap: {
+    flexFlow: 'row'
   }
 }
 
-class NotesMain extends Component {
+export class NotesMain extends Component {
   render() {
     return (
       <Container>
@@ -51,12 +55,12 @@ class NotesMain extends Component {
             <Menu />
           </Column>
         </Container>
-        <Container noPadding extraStyles={styles.fullHeight}>
+        <Container noPadding extraStyles={{...styles.fullHeight, ...styles.noWrap}}>
           <Column width="2" minWidth="250px" extraStyles={{...styles.borderLeftRight, ...styles.borderBottom}}>
             <ListNote />
           </Column>
           <Column width="8" minWidth="900px" extraStyles={{...styles.borderRight, ...styles.borderBottom}}>
-            <h1>TEXT BODY</h1>
+            <BodyNote />
           </Column>
         </Container>
       </Container>

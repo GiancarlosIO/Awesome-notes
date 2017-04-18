@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Radium from 'radium';
+import { addNoteFromApi } from '../../actions/notes';
 
 // Components
 import Icon from '../../ui/icons/icon';
@@ -17,6 +18,7 @@ export class AddNote extends Component {
 
   handleClickIcon = () => {
     console.log('icon note clicked');
+    this.props.dispatch(addNoteFromApi(''));
   }
 
   render() {
