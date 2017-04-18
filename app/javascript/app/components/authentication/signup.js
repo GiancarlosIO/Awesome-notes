@@ -9,7 +9,7 @@ import RenderField from './render_field';
 import Button from '../../ui/buttons/button';
 import Header from '../navigation/header';
 import {Redirect} from 'react-router-dom';
-import { signupUser } from '../../actions/';
+import { signupUser } from '../../actions/auth-user';
 
 const styles = {
   base: {

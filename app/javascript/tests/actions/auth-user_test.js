@@ -2,7 +2,7 @@ import React from 'react';
 import chai, { expect } from 'chai';
 import chaiEnzyme from 'enzyme';
 import * as Constants from '../../app/constants/';
-import * as Actions from '../../app/actions/';
+import * as Actions from '../../app/actions/auth-user';
 import configureMockStore from 'redux-mock-store';
 import ReduxThunk from 'redux-thunk';
 import nock from 'nock';

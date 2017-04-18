@@ -8,7 +8,7 @@ import Container from '../../grid/container';
 import Column from '../../grid/column';
 import { validateSiginForm } from './form_validations';
 import Button from '../../ui/buttons/button';
-import { signinUser } from '../../actions/';
+import { signinUser } from '../../actions/auth-user';
 
 const styles = {
   base: {

@@ -3,7 +3,7 @@ class Api::V1::NotesController < Api::V1::MasterApiController
   before_action :set_note, only: [:show, :update, :destroy]
 
   def index
-    @notes = current_api_user.notes
+    @notes = current_api_user.notes.reverse
   end
 
   def show
