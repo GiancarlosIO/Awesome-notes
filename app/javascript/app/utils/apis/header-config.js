@@ -12,7 +12,9 @@ export const setAuthApiHeaderConfig = (headerConfig, userData) => {
   authApiHeaderConfig["uid"] = headerConfig.uid;
   authApiHeaderConfig["expiry"] = headerConfig.expiry;
   localStorage.setItem('session', JSON.stringify(authApiHeaderConfig));
-  localStorage.setItem('user', JSON.stringify(userData));
+  if (userData) {
+    localStorage.setItem('user', JSON.stringify(userData));
+  }
 }
 
 // get authApiHeader
