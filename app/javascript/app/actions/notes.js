@@ -37,6 +37,7 @@ export const addNoteFromApi = (text) => {
       (response) => {
         setAuthApiHeaderConfig(response.headers, undefined);
         dispatch(addNote(response.data.note));
+        dispatch(selectNote(response.data.note.id));
         console.log('added note', response);
       },
       (error) => { console.log('error to add a note', error.response); }

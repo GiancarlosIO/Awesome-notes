@@ -19,12 +19,16 @@ const styles = {
       backgroundColor: '#2CC990',
       color: '#fff'
     }
+  },
+  selected: {
+    backgroundColor: '#2CC990',
+    color: '#fff'
   }
 }
 
-const Note = ({id, text, handleSelectNote}) => {
+const Note = ({id, text, handleSelectNote, selected}) => {
   return (
-    <div onClick={() => {handleSelectNote(id)}} style={styles.base}>
+    <div onClick={() => {handleSelectNote(id)}} style={[styles.base, selected && styles.selected]}>
       <span>{text}</span>
     </div>
   )

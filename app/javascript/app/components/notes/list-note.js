@@ -22,12 +22,12 @@ export class ListNote extends Component {
   }
 
   renderNotes = () => {
-    const notes = this.props.notes;
+    const { notes, noteSelectedId } = this.props;
     const notesArray = Object.keys(notes).map( index => {
       let noteElement = notes[index];
       return (
-        <Column width="10" key={noteElement.id}>
-          <Note {...noteElement} handleSelectNote={this.selectNote}/>
+        <Column width="10" key={noteElement.id} extraStyles={{height: '40px'}}>
+          <Note {...noteElement} handleSelectNote={this.selectNote} selected={noteSelectedId === noteElement.id}/>
         </Column>
       );
     });
@@ -36,7 +36,7 @@ export class ListNote extends Component {
 
   render() {
     return (
-      <Container width="10" noPadding>
+      <Container width="10" noPadding extraStyles={{justifyContent: 'flex-start'}}>
         { this.renderNotes() }
       </Container>
     )

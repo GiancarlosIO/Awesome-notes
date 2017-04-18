@@ -35,7 +35,7 @@ const styles = {
     borderBottom: '1px solid rgba(0,0,0,0.15)'
   },
   fullHeight: {
-    height: 'calc(100vh - 80px)'
+    minHeight: 'calc(100vh - 90px)'
   },
   noWrap: {
     flexFlow: 'row'
@@ -46,7 +46,7 @@ export class NotesMain extends Component {
   render() {
     return (
       <Container>
-        <Container noPadding>
+        <Container noPadding extraStyles={styles.noWrap}>
           <Column width="2" minWidth="250px" extraStyles={{...styles.baseColumn, ...styles.borderLeft}}>
             <SearchBar />
             <AddNote />
