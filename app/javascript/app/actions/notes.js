@@ -62,6 +62,24 @@ export const addNoteFromApi = (text) => {
   }
 }
 
+export const updateNoteFromApi = (noteId, text) => {
+  return (dispatch, getState, { NoteAPI }) => {
+    return NoteAPI.updateNote(noteId, text).request.then(
+      (response) => {
+        dispatch(updateNote(response.data.note));
+        console.log('note Update', response);
+      },
+      (error) => {
+        console.log('error to update', error.response);
+        if (error.response.status === 401) {
+          resetAuthApiHeaderConfig();
+          dispatch(unauthUser());
+        }
+      }
+    )
+  }
+}
+
 export const deleteNoteFromApi = (noteId) => {
   return (dispatch, getState, { NoteAPI }) => {
     return NoteAPI.deleteNote(noteId).request.then(

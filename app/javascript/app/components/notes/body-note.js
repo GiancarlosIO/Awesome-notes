@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import { connect } from 'react-redux';
+import { updateNoteFromApi } from '../../actions/notes';
+import _ from 'lodash';
 
 const styles = {
   base: {
@@ -22,19 +24,38 @@ const styles = {
 }
 
 export class BodyNote extends Component {
-  handleOnChange = (e) => {
-      const val = this.textarea.value;
-      console.log('value of textarea', val);
-    }
-
-  componentDidMount() {
-    if (this.props.noteSelected) {
-      this.textarea.focus();
+  constructor() {
+    super();
+    this.state = {
+      text: null,
+      loading: ''
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.noteSelected) {
+  handleOnChange = (e) => {
+    const text = this.textarea.value;
+    this.setState({ text }, (newState) => {
+      console.log('value of textarea', this.state.text);
+      this.updateNote(this.props.noteSelected.id, this.state.text);
+    });
+  }
+
+  updateNote = _.debounce((noteId, text) => {
+    this.props.dispatch(updateNoteFromApi(noteId, text));
+  }, 400);
+
+  componentWillReceiveProps(nextProps) {
+    const { noteSelected } = nextProps;
+    const { noteSelected: oldNoteSelected } = this.props;
+    if (noteSelected !== oldNoteSelected) {
+      this.setState({text: noteSelected.text});
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { noteSelected } = prevProps;
+    const { noteSelected: oldNoteSelected } = this.props;
+    if (noteSelected !== oldNoteSelected) {
       this.textarea.focus();
     }
   }
@@ -46,9 +67,10 @@ export class BodyNote extends Component {
         <textarea
           style={styles.base}
           onChange={this.handleOnChange}
+          autoFocus={this.state.text}
           ref={ (el) => {this.textarea = el;} }
-          value={noteSelected ? noteSelected.text : ''}
-          />
+          value={this.state.text ? this.state.text : ''}
+        />
       ) :
       null
   }

@@ -18,7 +18,7 @@ export class AddNote extends Component {
 
   handleClickIcon = () => {
     console.log('icon note clicked');
-    this.props.dispatch(addNoteFromApi('Blank...'));
+    this.props.dispatch(addNoteFromApi(''));
   }
 
   render() {

@@ -43,7 +43,8 @@ export default function(state = initialState, action) {
         all: {
           ...state.all,
           [`${action.payload.id}`]: action.payload
-        }
+        },
+        noteSelected: action.payload
       };
     case SELECT_NOTE:
       return {
