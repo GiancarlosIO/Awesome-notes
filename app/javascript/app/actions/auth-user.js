@@ -19,7 +19,7 @@ export const setUserData = (userData) => ({ type: SET_USER_DATA, payload: userDa
 
 // Signup users
 export const signupUser = ({ email, password, password_confirmation }) => {
-  return (dispatch, getState, AuthAPI) => {
+  return (dispatch, getState, { AuthAPI }) => {
     return AuthAPI.signup(email, password, password_confirmation).request.then(
       (response) => {
         //console.log('user register completed', response);
@@ -38,7 +38,7 @@ export const signupUser = ({ email, password, password_confirmation }) => {
 
 // Sign users
 export const signinUser = ({email, password}) => {
-  return (dispatch, getState, AuthAPI) => {
+  return (dispatch, getState, { AuthAPI }) => {
     return AuthAPI.signin(email, password).request.then(
       (response) => {
         //console.log('sign in user', response);
@@ -59,7 +59,7 @@ export const signinUser = ({email, password}) => {
 
 // Sign out Users
 export function signoutUser() {
-  return (dispatch, getState, AuthAPI) => {
+  return (dispatch, getState, { AuthAPI }) => {
     return AuthAPI.signout().request.then(
       (response) => {
         // signout
