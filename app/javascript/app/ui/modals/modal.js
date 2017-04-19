@@ -47,11 +47,8 @@ export default class Modal extends Component {
     }
   }
 
-  componentDidUpdate() {
-    if (!this.props.open) {
-      ReactDOM.unmountComponentAtNode(this.modalTarget);
-      document.body.removeChild(this.modalTarget);
-    } else {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.open) {
       this.modalTarget = document.createElement('div');
       this.modalTarget.className = "modal";
       document.body.appendChild(this.modalTarget);

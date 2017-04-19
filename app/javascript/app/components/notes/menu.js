@@ -55,12 +55,16 @@ export class Menu extends Component {
           <p style={styles.userEmail}>Updated at: <span style={styles.normalText}>{noteSelected.updated_at}</span></p>
         </Modal>
       )
-    }
+    } else { return null }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({openModal: false});
   }
 
   render() {
     const { email, notesCount, noteSelected } = this.props;
-    return notesCount > 0 ?
+    return notesCount.length > 0 ?
       (
         <div style={styles.base}>
           <Icon
