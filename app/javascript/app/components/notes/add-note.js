@@ -17,8 +17,9 @@ const styles = {
 export class AddNote extends Component {
 
   handleClickIcon = () => {
+    const { searchText } = this.props;
     console.log('icon note clicked');
-    this.props.dispatch(addNoteFromApi(''));
+    this.props.dispatch(addNoteFromApi(searchText ? searchText : 'empty note...'));
   }
 
   render() {
@@ -31,4 +32,7 @@ export class AddNote extends Component {
 }
 
 const AddNoteRadium = Radium()(AddNote);
-export default connect()(AddNoteRadium);
+
+const mapStateToProps = (state) => ({ searchText: state.notes.searchText });
+
+export default connect(mapStateToProps)(AddNoteRadium);

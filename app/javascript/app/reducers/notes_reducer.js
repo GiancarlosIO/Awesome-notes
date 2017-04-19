@@ -19,8 +19,7 @@ export default function(state = initialState, action) {
     case FETCH_NOTES:
       return {
         ...state,
-        all: action.payload,
-        noteSelected: action.payload[`${Object.keys(action.payload)[0]}`]
+        all: action.payload
       };
     case ADD_NOTE:
       return {

@@ -29,7 +29,11 @@ const styles = {
 const Note = ({id, text, handleSelectNote, selected}) => {
   return (
     <div onClick={() => {handleSelectNote(id)}} style={[styles.base, selected && styles.selected]}>
-      <span>{text}</span>
+      <span>
+        {
+          text.length > 30 ? (`${text.toLowerCase().substr(0, 30)}...`) : text
+        }
+      </span>
     </div>
   )
 }

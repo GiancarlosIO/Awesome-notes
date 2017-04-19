@@ -20,7 +20,7 @@ export const fetchNotes = (notes) => ({ type: FETCH_NOTES, payload: notes });
 export const addNote = (note) => ({ type: ADD_NOTE, payload: note });
 export const deleteNote = (noteId) => ({ type: DELETE_NOTE, payload: noteId });
 export const updateNote = (note) => ({ type: UPDATE_NOTE, payload: note });
-export const selectNote = (note) => ({ type: SELECT_NOTE, payload: note });
+export const selectNote = (noteId) => ({ type: SELECT_NOTE, payload: noteId });
 export const setSearchText = (text) => ({ type: SET_SEARCH_TEXT, payload: text })
 
 export const fetchNotesFromApi = () => {

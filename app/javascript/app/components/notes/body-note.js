@@ -27,8 +27,7 @@ export class BodyNote extends Component {
   constructor() {
     super();
     this.state = {
-      text: null,
-      loading: ''
+      text: null
     }
   }
 
@@ -44,21 +43,24 @@ export class BodyNote extends Component {
     this.props.dispatch(updateNoteFromApi(noteId, text));
   }, 400);
 
-  componentWillReceiveProps(nextProps) {
-    const { noteSelected } = nextProps;
-    const { noteSelected: oldNoteSelected } = this.props;
-    if (noteSelected !== oldNoteSelected) {
-      this.setState({text: noteSelected.text});
-    }
+  componentDidMount() {
+    setTimeout(() => {
+      this.textarea.focus();
+    }, 100)
   }
 
-  componentDidUpdate(prevProps) {
-    const { noteSelected } = prevProps;
-    const { noteSelected: oldNoteSelected } = this.props;
-    if (noteSelected !== oldNoteSelected) {
-      this.textarea.focus();
-    }
+  componentWillReceiveProps(nextProps) {
+    const { noteSelected } = nextProps;
+    this.setState({text: noteSelected ? noteSelected.text : ''});
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   const { noteSelected, searchText } = this.props;
+  //   if ( !searchText && this.textarea ) {
+  //     console.log('focus', !searchText)
+  //     this.textarea.focus();
+  //   }
+  // }
 
   render() {
     const { noteSelected } = this.props;
@@ -67,9 +69,8 @@ export class BodyNote extends Component {
         <textarea
           style={styles.base}
           onChange={this.handleOnChange}
-          autoFocus={this.state.text}
           ref={ (el) => {this.textarea = el;} }
-          value={this.state.text ? this.state.text : ''}
+          value={this.state.text}
         />
       ) :
       null
@@ -80,7 +81,8 @@ const BodyNoteRadium = Radium(BodyNote);
 
 function mapStateToProps(state) {
   return {
-    noteSelected: state.notes.noteSelected
+    noteSelected: state.notes.noteSelected,
+    searchText: state.notes.searchText
   }
 }
 
