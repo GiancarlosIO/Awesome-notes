@@ -24,9 +24,10 @@ const styles = {
   }
 }
 
-const Icon = ({type, title, extraStyles, handleClick}) =>
+const Icon = ({type, title, extraStyles, handleClick, className}) =>
   (
     <div
+      className={className}
       style={[styles.base, extraStyles && {...extraStyles}]}
       title={title}
       onClick={handleClick}>
@@ -35,7 +36,8 @@ const Icon = ({type, title, extraStyles, handleClick}) =>
   )
 
 Icon.proptypes = {
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  className: PropTypes.string
 }
 
 export default Radium()(Icon);

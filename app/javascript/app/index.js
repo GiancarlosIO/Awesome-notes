@@ -24,7 +24,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //   ReduxThunk.withExtraArgument(AuthAPI)
 // )(createStore);
 // const store = storeWithMiddleware(storeConfig);
-const store = createStore(storeConfig, {}, composeEnhancers(
+export const store = createStore(storeConfig, {}, composeEnhancers(
   applyMiddleware(ReduxThunk.withExtraArgument({ AuthAPI, NoteAPI }))
 ));
 window.store = store;
