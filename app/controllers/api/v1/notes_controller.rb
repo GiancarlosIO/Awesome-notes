@@ -4,6 +4,10 @@ class Api::V1::NotesController < Api::V1::MasterApiController
 
   def index
     @notes = current_api_user.notes.reverse
+    @tags = @notes.map{|note| note.get_tags}.select{|t| t.length > 0}
+    @tagsNotes = [];
+    @tags.each{|t| t.each{|s| @tagsNotes << s } }
+    @tagsNotes.uniq!
   end
 
   def show

@@ -28,8 +28,11 @@ export const fetchNotesFromApi = () => {
     return NoteAPI.fetchNotes().request.then(
       (response) => {
         let objNotes = {};
-        response.data.notes.forEach( note => objNotes[`${note.id}`] = note );
-        dispatch(fetchNotes(objNotes));
+        const notes = response.data.notes;
+        notes.forEach( note => objNotes[`${note.id}`] = note );
+        const lastNote = objNotes[Object.keys(objNotes)[0]];
+        dispatch(fetchNotes({notes: objNotes, tags: response.data.tags}));
+        dispatch(selectNote(lastNote.id));
         console.log('fetch notes', response);
       },
       (error) => {

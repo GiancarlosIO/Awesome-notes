@@ -10,6 +10,7 @@ import Menu from './menu';
 import ListNote from './list-note';
 import Note from './note';
 import BodyNote from './body-note';
+import TagNote from './tag-note';
 
 const styles = {
   baseColumn: {
@@ -55,6 +56,7 @@ export class NotesMain extends Component {
             <Menu />
           </Column>
         </Container>
+        <TagNote />
         <Container noPadding extraStyles={{...styles.fullHeight, ...styles.noWrap}}>
           <Column width="2" minWidth="250px" extraStyles={{...styles.borderLeftRight, ...styles.borderBottom}}>
             <ListNote />

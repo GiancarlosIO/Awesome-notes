@@ -27,7 +27,7 @@ export class BodyNote extends Component {
   constructor() {
     super();
     this.state = {
-      text: null
+      text: ''
     }
   }
 
@@ -44,9 +44,11 @@ export class BodyNote extends Component {
   }, 400);
 
   componentDidMount() {
-    setTimeout(() => {
-      this.textarea.focus();
-    }, 100)
+    if (this.props.noteSelected) {
+      setTimeout(() => {
+        this.textarea.focus();
+      }, 100)
+    }
   }
 
   componentWillReceiveProps(nextProps) {

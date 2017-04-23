@@ -10,8 +10,9 @@ import {
 const initialState = {
   all: {},
   noteSelected: null,
-  tags: [],
-  searchText: null
+  tags: null,
+  searchText: null,
+  searchTag: null
 }
 
 export default function(state = initialState, action) {
@@ -19,7 +20,8 @@ export default function(state = initialState, action) {
     case FETCH_NOTES:
       return {
         ...state,
-        all: action.payload
+        all: action.payload.notes,
+        tags: action.payload.tags
       };
     case ADD_NOTE:
       return {
