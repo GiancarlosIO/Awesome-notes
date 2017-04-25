@@ -31,6 +31,7 @@ class Api::V1::NotesController < Api::V1::MasterApiController
   end
 
   def destroy
+    @note.tags.delete_all
     if @note.destroy
       render json: { status: 'success' }, status: 200
     else

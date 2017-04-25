@@ -4,7 +4,9 @@ import {
   DELETE_NOTE,
   UPDATE_NOTE,
   SELECT_NOTE,
-  SET_SEARCH_TEXT
+  SET_SEARCH_TEXT,
+  UPDATE_NOTE_SELECTED,
+  UPDATE_TAGS
 } from '../constants/';
 
 import {
@@ -21,7 +23,9 @@ export const addNote = (note) => ({ type: ADD_NOTE, payload: note });
 export const deleteNote = (noteId) => ({ type: DELETE_NOTE, payload: noteId });
 export const updateNote = (note) => ({ type: UPDATE_NOTE, payload: note });
 export const selectNote = (noteId) => ({ type: SELECT_NOTE, payload: noteId });
-export const setSearchText = (text) => ({ type: SET_SEARCH_TEXT, payload: text })
+export const setSearchText = (text) => ({ type: SET_SEARCH_TEXT, payload: text });
+export const updateNoteSelected = (note) => ({ type: UPDATE_NOTE_SELECTED, payload: note });
+export const updateTags = (tag_name) => ({ type: UPDATE_TAGS, payload: tag_name });
 
 export const fetchNotesFromApi = () => {
   return (dispatch, getState, { NoteAPI }) => {
@@ -110,5 +114,20 @@ export const deleteNoteFromApi = (noteId) => {
         }
       }
     )
+  }
+}
+
+export const updateTag = (tag_name, note_id) => {
+  return (dispatch, getState, { TagAPI }) => {
+    return TagAPI.updateTag(tag_name, note_id).request.then(
+      (response) => {
+        const note = response.data.note;
+        dispatch(updateNote(note))
+        dispatch(updateTags(tag_name));
+        console.log('tag updated', response.data);
+      }
+    ).catch((error) => {
+      console.log('error to update tags', error);
+    })
   }
 }

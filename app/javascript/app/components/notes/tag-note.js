@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Radium from 'radium';
 import _ from 'lodash';
+import TagsInput from 'react-tagsinput';
+import { updateTag } from '../../actions/notes';
 
 import Column from '../../grid/column';
 import Container from '../../grid/container';
@@ -67,20 +69,19 @@ class TagNote extends Component {
     }
   }
 
-  handleChangeInput = (e) => {
-    const text = e.target.value;
+  handleChangeInput = (tags, changed, changedIndexes) => {
     const { noteSelected: note } = this.props;
-    this.setState({text},() => {
-      console.log('handle change input', text);
-      if (note) {
-        this.updateTag(this.state.text, note.id)
-      };
-    });
+    if (note) {
+      console.log('tags', tags);
+      console.log('changed', changed);
+      console.log('changedIndexes', changedIndexes);
+      const noteTags = note.tags.map( tag => tag.name );
+      if (noteTags.indexOf(changed) === -1) {
+        const tag_name = changed[0];
+        this.props.dispatch(updateTag(tag_name, note.id));
+      }
+    };
   }
-
-  updateTag = _.debounce((noteId, text) => {
-    console.log('creating or updating tag', `noteId:${noteId}, text:${text}`);
-  }, 400);
 
   handleChangeSelect = (e) => {
     const selectedValue = e.target.options[e.target.options.selectedIndex].value;
@@ -88,7 +89,8 @@ class TagNote extends Component {
   }
 
   render() {
-    const { noteSelected } = this.props;
+    const { noteSelected, tags } = this.props;
+    const noteTags = noteSelected ? noteSelected.tags.map( tag => tag.name ) : [];
     return (
       <Container noPadding extraStyles={styles.noWrap}>
         <Column width="2" minWidth="250px" extraStyles={{...styles.borderLeftRight, ...styles.borderBottom}}>
@@ -100,7 +102,7 @@ class TagNote extends Component {
         <Column width="8" minWidth="900px" extraStyles={{...styles.borderRight, ...styles.borderBottom}}>
           {
             noteSelected ?
-            <input style={styles.input} type="text" onChange={this.handleChangeInput} value={this.state.text} />
+            <TagsInput value={noteTags} onChange={this.handleChangeInput} onlyUnique maxTags={5}/>
             : null
           }
         </Column>
