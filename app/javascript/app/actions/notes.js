@@ -6,7 +6,8 @@ import {
   SELECT_NOTE,
   SET_SEARCH_TEXT,
   UPDATE_NOTE_SELECTED,
-  UPDATE_TAGS
+  UPDATE_TAGS,
+  SET_TAGS
 } from '../constants/';
 
 import {
@@ -26,6 +27,7 @@ export const selectNote = (noteId) => ({ type: SELECT_NOTE, payload: noteId });
 export const setSearchText = (text) => ({ type: SET_SEARCH_TEXT, payload: text });
 export const updateNoteSelected = (note) => ({ type: UPDATE_NOTE_SELECTED, payload: note });
 export const updateTags = (tag_name) => ({ type: UPDATE_TAGS, payload: tag_name });
+export const setTags = (tags) => ({ type: SET_TAGS, payload: tags });
 
 export const fetchNotesFromApi = () => {
   return (dispatch, getState, { NoteAPI }) => {
@@ -92,6 +94,7 @@ export const deleteNoteFromApi = (noteId) => {
     return NoteAPI.deleteNote(noteId).request.then(
       (response) => {
         const notes = getState().notes.all;
+        const tags = response.data.tags;
         const keys = Object.keys(notes);
         let noteIndex = keys.findIndex( index => index == noteId );
         if (keys.length > 1 ) {
@@ -104,6 +107,7 @@ export const deleteNoteFromApi = (noteId) => {
           dispatch(selectNote(null));
         }
         dispatch(deleteNote(noteId));
+        dispatch(setTags(tags));
         console.log('note deleted', response);
       },
       (error) => {

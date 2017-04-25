@@ -6,7 +6,8 @@ import {
   SELECT_NOTE,
   SET_SEARCH_TEXT,
   UPDATE_NOTE_SELECTED,
-  UPDATE_TAGS
+  UPDATE_TAGS,
+  SET_TAGS
 } from '../constants/';
 
 const initialState = {
@@ -75,6 +76,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         searchText: action.payload
+      }
+    case SET_TAGS:
+      return {
+        ...state,
+        tags: action.payload
       }
     default:
       return state;

@@ -10,3 +10,4 @@ export const SELECT_NOTE = 'SELECT_NOTE';
 export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 export const UPDATE_NOTE_SELECTED = 'UPDATE_NOTE_SELECTED';
 export const UPDATE_TAGS = 'UPDATE_TAGS';
+export const SET_TAGS = 'SET_TAGS';
