@@ -10,3 +10,4 @@ json.notes @notes do |note|
     json.updated_at tag.updated_at
   end
 end
+json.tags @tagsNotes

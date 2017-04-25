@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
 
 const styles = {
   base: {
@@ -33,18 +34,18 @@ const styles = {
   }
 }
 
-export const Button = ({ type, bg, disabled, children }) => {
-    const isDisabled = disabled === undefined;
+export const Button = ({ type, bg, children, disabled }) => {
     return (
-      <button style={[styles.base, styles[bg]]} type={type} disabled={isDisabled}>
+      <button style={[styles.base, styles[bg]]} type={type} disabled={disabled}>
         { children }
       </button>
     )
 }
 
-Button.PropTypes = {
-  type: React.PropTypes.string.isRequired,
-  bg: React.PropTypes.string.isRequired
+Button.propTypes = {
+  type: PropTypes.string.isRequired,
+  bg: PropTypes.string.isRequired,
+  disabled: PropTypes.bool
 }
 
 export default Radium()(Button);

@@ -13,25 +13,25 @@ const styles = {
 export const BenefitsSection = (props) => {
   return (
     <Container row extraStyles={styles.base} yCenter>
-      <Column width={2} minWidth="250px">
+      <Column width="2" minWidth="250px">
         <Benefit
           title="Benefit 1"
           paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tortor turpis"
         />
       </Column>
-      <Column width={2} minWidth="250px">
+      <Column width="2" minWidth="250px">
         <Benefit
           title="Benefit 2"
           paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tortor turpis"
         />
       </Column>
-      <Column width={2} minWidth="250px">
+      <Column width="2" minWidth="250px">
         <Benefit
           title="Benefit 3"
           paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tortor turpis"
         />
       </Column>
-      <Column width={2} minWidth="250px">
+      <Column width="2" minWidth="250px">
         <Benefit
           title="Benefit 4"
           paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tortor turpis"

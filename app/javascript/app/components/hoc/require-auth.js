@@ -6,8 +6,8 @@ export default function(ComposeComponent) {
   class Authentication extends Component {
     render() {
       const { authenticated } = this.props;
-      console.log('prosp hoc authenticate', this.props);
-      return authenticated ?
+      const session = localStorage.getItem('session');
+      return authenticated && session ?
        <ComposeComponent {...this.props} /> :
        (<Redirect to={{ pathname: '/', state: { from: this.props.location }}}/>)
     }

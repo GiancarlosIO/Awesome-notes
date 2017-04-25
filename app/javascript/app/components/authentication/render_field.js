@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
 
 const styles = {
   container: {
@@ -56,15 +57,16 @@ const styles = {
 }
 
 export const RenderField = (props) => {
-  const { name, className, input, label, type, meta: { touched, error, warning } } = props;
+  const { name, className, input, label, type, placeholder, meta: { touched, error, warning } } = props;
   return (
     <div style={styles.container}>
-      <label
+      { label &&
+        (<label
         htmlFor={name}
         style={styles.label}
       >
         {label}
-      </label>
+      </label>)}
       <div style={styles.inputContainer}>
         {
           ( type === "text" || type === "email" || type === "password" ) &&
@@ -72,7 +74,7 @@ export const RenderField = (props) => {
             style={[styles.input, error && touched && styles.inputError]}
             type={type}
             {...input}
-            placeholder={label}
+            placeholder={label ? label : placeholder}
           />
         }
         {
@@ -92,10 +94,8 @@ export const RenderField = (props) => {
   )
 }
 
-RenderField.PropTypes = {
-  className: React.PropTypes.string,
-  label: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired
+RenderField.propTypes = {
+  type: PropTypes.string.isRequired
 }
 
 export default Radium()(RenderField);

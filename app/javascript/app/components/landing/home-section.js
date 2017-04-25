@@ -29,7 +29,7 @@ const styles = {
 
 export const HomeSection = (props) => {
   return (
-    <Column width={10}>
+    <Column width="10">
       <div style={styles.base}>
         <h1 style={styles.title}>Awesome Notes App</h1>
         <p style={styles.paragraph}>A simple note application for learning purposes...</p>

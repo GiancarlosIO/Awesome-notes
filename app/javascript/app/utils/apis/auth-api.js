@@ -1,12 +1,12 @@
+const { env } = require('process')
 import axios from 'axios';
 import {
   getAuthApiHeaderConfig
 } from './header-config';
 
-const BASE_URL= '/api/v1/auth';
+const BASE_URL= env.NODE_ENV === 'test' ? 'http://localhost:3000/api/v1/auth' : '/api/v1/auth';
 
 // get header values to send in request
-
 //Create a new user
 export const signup = (email, password, password_confirmation) => {
   let CancelToken = axios.CancelToken;
@@ -45,7 +45,8 @@ export const signout = () => {
   let request = axios({
     method: 'delete',
     url: `${BASE_URL}/sign_out`,
-    headers: getAuthApiHeaderConfig()
+    headers: getAuthApiHeaderConfig(),
+    responseType: 'json'
   });
   return { request, cancel };
 }

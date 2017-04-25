@@ -1,22 +1,28 @@
 class Api::V1::TagsController < Api::V1::MasterApiController
   before_action :authenticate_api_user!
-  before_action :set_note, only: [:create]
+  before_action :set_note, only: [:create, :update]
   before_action :set_tag, only: [:update, :destroy]
 
+  def index
+    @tags = current_api_user.notes.reverse.map{|note| note.get_tags}.select{|t| t.length > 0}
+    @tagsNotes = [];
+    @tags.each{|t| t.each{|s| @tagsNotes << s } }
+    @tagsNotes.uniq!
+  end
+
   def create
-    @tag = @note.tags.new(tag_params)
-    if @tag.save
-      render template: 'api/v1/tags/show', status: 200
+    if Tag.update_tags(tag_params[:tag_name], @note.id)
+      render template: 'api/v1/notes/show', status: 200
     else
-      render json: { status: 'error', errors: @tag.errors }
+      render json: { status: 'error', errors: 'error to update tag' }
     end
   end
 
   def update
-    if @tag.update(tag_params)
+    if Tag.update_tags(tag_params[:tag_name], @note.id)
       render template: 'api/v1/tags/show', status: 200
     else
-      render json: { status: 'error', errors: @tag.errors }
+      render json: { status: 'error', errors: 'error to update tag' }
     end
   end
 
@@ -46,6 +52,6 @@ class Api::V1::TagsController < Api::V1::MasterApiController
   end
 
   def tag_params
-    params.require(:tag).permit(:name, :note_id)
+    params.require(:tag).permit(:note_id, :tag_name)
   end
 end

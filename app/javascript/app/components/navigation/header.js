@@ -6,7 +6,7 @@ import Column from '../../grid/column';
 import signin from '../authentication/signin';
 import signup from '../authentication/signup';
 import notes from '../notes/index';
-import { signoutUser } from '../../actions/';
+import { signoutUser } from '../../actions/auth-user';
 
 const styles = {
   base: {
@@ -71,11 +71,11 @@ export const Header = ({authenticated, user, dispatch}) => {
       ]
     } else {
       return [
-        <LinkHeader path="/signup" key="1">
-          Sign up
-        </LinkHeader>,
         <LinkHeader path="/signin" key="2">
           Sign in
+        </LinkHeader>,
+        <LinkHeader path="/signup" key="1">
+          Create an account
         </LinkHeader>
       ]
     }
@@ -83,12 +83,12 @@ export const Header = ({authenticated, user, dispatch}) => {
   return (
     <header>
       <nav style={styles.base}>
-        <Column width={4}>
+        <Column width="4">
           <LinkHeader path="/" exact noStyles>
             <div className="logo" style={styles.logo}></div>
           </LinkHeader>
         </Column>
-        <Column width={6}>
+        <Column width="6">
           <LinkHeader path="/" key="1">
             Home
           </LinkHeader>

@@ -1,9 +1,11 @@
 import React from 'react';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
 
 const styles = {
   base: {
-    display: 'flex'
+    display: 'flex',
+    boxSizing: 'border-box'
   },
   1: {
     width: '10%'
@@ -38,12 +40,21 @@ const styles = {
 }
 
 export const Column = (props) => {
-  const { children, width, minWidth, extraStyles } = props;
+  const { children, width, minWidth, maxWidth, extraStyles } = props;
   return (
-    <div style={[styles.base, width && styles[width], minWidth && {minWidth: minWidth}, extraStyles && {...extraStyles}]}>
+    <div
+      style={[styles.base, width && styles[width], minWidth && {minWidth: minWidth}, maxWidth && {maxWidth: maxWidth}, extraStyles && {...extraStyles}]}>
       { children }
     </div>
   )
+}
+
+Column.propTypes = {
+  handleClick: PropTypes.func,
+  width: PropTypes.string,
+  minWidth: PropTypes.string,
+  maxWidth: PropTypes.string,
+  extraStyles: PropTypes.object
 }
 
 export default Radium()(Column);
