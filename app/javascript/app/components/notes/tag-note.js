@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Radium from 'radium';
 import _ from 'lodash';
 import TagsInput from 'react-tagsinput';
-import { updateTag } from '../../actions/notes';
+import { updateTag, selectTag } from '../../actions/notes';
 
 import Column from '../../grid/column';
 import Container from '../../grid/container';
@@ -72,9 +72,6 @@ class TagNote extends Component {
   handleChangeInput = (tags, changed, changedIndexes) => {
     const { noteSelected: note } = this.props;
     if (note) {
-      console.log('tags', tags);
-      console.log('changed', changed);
-      console.log('changedIndexes', changedIndexes);
       const noteTags = note.tags.map( tag => tag.name );
       if (noteTags.indexOf(changed) === -1) {
         const tag_name = changed[0];
@@ -85,12 +82,12 @@ class TagNote extends Component {
 
   handleChangeSelect = (e) => {
     const selectedValue = e.target.options[e.target.options.selectedIndex].value;
-    console.log('handle change select', selectedValue);
+    this.props.dispatch(selectTag(selectedValue));
   }
 
   render() {
     const { noteSelected, tags } = this.props;
-    const noteTags = noteSelected ? noteSelected.tags.map( tag => tag.name ) : [];
+    const noteTags = noteSelected ? noteSelected.tags : [];
     return (
       <Container noPadding extraStyles={styles.noWrap}>
         <Column width="2" minWidth="250px" extraStyles={{...styles.borderLeftRight, ...styles.borderBottom}}>

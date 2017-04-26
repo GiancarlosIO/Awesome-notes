@@ -14,6 +14,7 @@ A simple note app for learning purposes built with rails, react and redux
 - redux-thunk: '2.2.0'
 - reselect: '3.0.0'
 - radium: '0.18.2'
+- react-tagsinput: '3.16.1'
 
 # Libs used for testing:
 - chai: '3.5.0'

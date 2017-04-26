@@ -7,7 +7,8 @@ import {
   SET_SEARCH_TEXT,
   UPDATE_NOTE_SELECTED,
   UPDATE_TAGS,
-  SET_TAGS
+  SET_TAGS,
+  SELECT_TAG
 } from '../constants/';
 
 import {
@@ -28,6 +29,7 @@ export const setSearchText = (text) => ({ type: SET_SEARCH_TEXT, payload: text }
 export const updateNoteSelected = (note) => ({ type: UPDATE_NOTE_SELECTED, payload: note });
 export const updateTags = (tag_name) => ({ type: UPDATE_TAGS, payload: tag_name });
 export const setTags = (tags) => ({ type: SET_TAGS, payload: tags });
+export const selectTag = (tag) => ({ type: SELECT_TAG, payload: tag });
 
 export const fetchNotesFromApi = () => {
   return (dispatch, getState, { NoteAPI }) => {
