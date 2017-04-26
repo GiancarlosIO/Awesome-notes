@@ -27,7 +27,6 @@ export const getFilteredNotesByTag = createSelector(
   [getFilteredNotes, getSearchTag],
   (notes, searchTag) => {
     if (searchTag) {
-      console.log('search tag from reselect', searchTag)
       let notesFiltered = {};
       Object.keys(notes).map( index => {
         const note = notes[index];

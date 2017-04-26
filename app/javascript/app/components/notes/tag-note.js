@@ -72,9 +72,6 @@ class TagNote extends Component {
   handleChangeInput = (tags, changed, changedIndexes) => {
     const { noteSelected: note } = this.props;
     if (note) {
-      console.log('tags', tags);
-      console.log('changed', changed);
-      console.log('changedIndexes', changedIndexes);
       const noteTags = note.tags.map( tag => tag.name );
       if (noteTags.indexOf(changed) === -1) {
         const tag_name = changed[0];
@@ -85,7 +82,6 @@ class TagNote extends Component {
 
   handleChangeSelect = (e) => {
     const selectedValue = e.target.options[e.target.options.selectedIndex].value;
-    console.log('handle change select', selectedValue);
     this.props.dispatch(selectTag(selectedValue));
   }
 
