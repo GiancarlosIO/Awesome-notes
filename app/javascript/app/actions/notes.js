@@ -75,13 +75,16 @@ export const addNoteFromApi = (text) => {
 
 export const updateNoteFromApi = (noteId, text) => {
   return (dispatch, getState, { NoteAPI }) => {
+    const olderNote = {...getState().notes.all[noteId]};
+    const newNote = {...getState().notes.all[noteId], text: text};
+    dispatch(updateNote(newNote));
     return NoteAPI.updateNote(noteId, text).request.then(
       (response) => {
-        dispatch(updateNote(response.data.note));
         console.log('note Update', response);
       },
       (error) => {
         console.log('error to update', error.response);
+        dispatch(updateNote(olderNote));
         if (error.response.status === 401) {
           resetAuthApiHeaderConfig();
           dispatch(unauthUser());
