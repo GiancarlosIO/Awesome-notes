@@ -34,7 +34,6 @@ export class BodyNote extends Component {
   handleOnChange = (e) => {
     const text = this.textarea.value;
     this.setState({ text }, (newState) => {
-      console.log('value of textarea', this.state.text);
       this.updateNote(this.props.noteSelected.id, this.state.text);
     });
   }
