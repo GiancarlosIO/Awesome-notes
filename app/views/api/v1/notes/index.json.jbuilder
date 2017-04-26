@@ -3,11 +3,6 @@ json.notes @notes do |note|
   json.text note.text
   json.created_at note.created_at
   json.updated_at note.updated_at
-  json.tags note.tags do |tag|
-    json.id tag.id
-    json.name tag.name
-    json.created_at tag.created_at
-    json.updated_at tag.updated_at
-  end
+  json.tags note.get_tags
 end
 json.tags @tagsNotes

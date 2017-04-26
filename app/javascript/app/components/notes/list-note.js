@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Container from '../../grid/container';
 import Column from '../../grid/column';
 import { fetchNotesFromApi, selectNote } from '../../actions/notes';
-import { getFilteredNotes } from '../../selectors/';
+import { getFilteredNotesByTag } from '../../selectors/';
 
 import Note from './note';
 
@@ -64,7 +64,7 @@ export class ListNote extends Component {
 
 function mapStateToProps(state) {
   return {
-    notes: getFilteredNotes(state),
+    notes: getFilteredNotesByTag(state),
     searchText: state.notes.searchText,
     noteSelected: state.notes.noteSelected
   }
