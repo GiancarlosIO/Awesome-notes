@@ -80,7 +80,7 @@ export const updateNoteFromApi = (noteId, text) => {
     dispatch(updateNote(newNote));
     return NoteAPI.updateNote(noteId, text).request.then(
       (response) => {
-        console.log('note Update', response);
+        // console.log('note Update', response);
       },
       (error) => {
         console.log('error to update', error.response);
@@ -113,7 +113,7 @@ export const deleteNoteFromApi = (noteId) => {
         }
         dispatch(deleteNote(noteId));
         dispatch(setTags(tags));
-        console.log('note deleted', response);
+        // console.log('note deleted', response);
       },
       (error) => {
         console.log('error to delete the note', error.response);
@@ -133,7 +133,7 @@ export const updateTag = (tag_name, note_id) => {
         const note = response.data.note;
         dispatch(updateNote(note))
         dispatch(updateTags(tag_name));
-        console.log('tag updated', response.data);
+        // console.log('tag updated', response.data);
       }
     ).catch((error) => {
       console.log('error to update tags', error);

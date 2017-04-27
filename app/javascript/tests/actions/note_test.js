@@ -223,7 +223,7 @@ describe('note actions', () => {
       return store.dispatch(Actions.updateTag('tag2', 1))
         .then(() => {
           expect(store.getActions()).to.eql(expectedActions);
-        })
+        });
     });
   });
 })
