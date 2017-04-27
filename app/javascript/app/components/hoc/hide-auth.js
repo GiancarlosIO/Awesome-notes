@@ -8,7 +8,7 @@ export default function(ComponseComponent) {
       const { authenticated } = this.props;
       return !authenticated ?
       (<ComponseComponent {...this.props} />) :
-      (<Redirect to={{ pathname: '/', state: { from: this.props.location } }} />)
+      (<Redirect to={{ pathname: '/notes', state: { from: this.props.location } }} />)
     }
   };
 

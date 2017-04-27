@@ -7,7 +7,7 @@ import { authUser, setUserData } from './actions/auth-user';
 import { verifyExpiryAccessToken } from './utils/apis/header-config';
 
 // styles
-import 'react-tagsinput/react-tagsinput.css'
+// import 'react-tagsinput/react-tagsinput.scss'
 
 // Routes
 import Routes from './routes/';
