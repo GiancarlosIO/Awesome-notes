@@ -8,7 +8,7 @@ import ReduxThunk from 'redux-thunk';
 import nock from 'nock';
 import * as AuthAPI from '../../app/utils/apis/auth-api';
 
-describe('actions', () => {
+describe('auth actions', () => {
   describe('sync', () => {
     it('should create an action of type auth user', () => {
       const expectedAction = {
@@ -67,7 +67,7 @@ describe('actions', () => {
           "uid": "test1@gmail.com"
         }}
       ];
-      const middlewares = [ ReduxThunk.withExtraArgument(AuthAPI) ];
+      const middlewares = [ ReduxThunk.withExtraArgument({AuthAPI}) ];
       const mockStore = configureMockStore(middlewares);
       const store = mockStore({auth: { authenticated: false, user: null, errors: [] }});
       return store.dispatch(Actions.signupUser({
@@ -95,7 +95,7 @@ describe('actions', () => {
             full_messages: ["Password confirmation doesn't match Password"]
           }
         });
-      const middlewares = [ ReduxThunk.withExtraArgument(AuthAPI) ];
+      const middlewares = [ ReduxThunk.withExtraArgument({AuthAPI}) ];
       const mockstore = configureMockStore(middlewares);
       const store = mockstore({auth: { authenticated: false, user: null, erros: [] }});
       const expectedActions = [
@@ -127,7 +127,7 @@ describe('actions', () => {
             uid: 'test1@gmail.com'
           }
         });
-      const middlewares = [ ReduxThunk.withExtraArgument(AuthAPI) ];
+      const middlewares = [ ReduxThunk.withExtraArgument({AuthAPI}) ];
       const mockstore = configureMockStore(middlewares);
       const store = mockstore({ auth: { authenticated: false, user: null, errors: [] } });
       const expectedActions = [
@@ -158,7 +158,7 @@ describe('actions', () => {
         }).reply(401, {
             errors: ["Invalid login credentials. Please try again."]
         });
-      const middlewares = [ ReduxThunk.withExtraArgument(AuthAPI) ];
+      const middlewares = [ ReduxThunk.withExtraArgument({AuthAPI}) ];
       const mockstore = configureMockStore(middlewares);
       const store = mockstore({ auth: { authenticated: false, user: null, errors: [] } });
       const expectedActions = [
@@ -176,7 +176,7 @@ describe('actions', () => {
       nock('http://localhost:3000')
       .delete('/api/v1/auth/sign_out')
       .reply(200, { status: "success" });
-      const middlewares = [ ReduxThunk.withExtraArgument(AuthAPI) ];
+      const middlewares = [ ReduxThunk.withExtraArgument({AuthAPI}) ];
       const mockstore = configureMockStore(middlewares);
       const store = mockstore({ auth: { authenticated: false, user: null, errors: [] } });
       const expectedActions = [
