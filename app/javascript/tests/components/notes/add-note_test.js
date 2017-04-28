@@ -1,7 +1,6 @@
 import React from 'react';
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
-import configureMockStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 import AddNoteConnected, { AddNote } from '../../../app/components/notes/add-note';
 
