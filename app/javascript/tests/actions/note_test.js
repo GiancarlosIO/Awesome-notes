@@ -197,7 +197,7 @@ describe('note actions', () => {
           expect(store.getActions()).to.eql(expectedAction);
         })
     });
-    it('create two actions of type UPDATE_NOTE and UPDATE_TAGS when updateTag is complete', () => {
+    it('create two actions of type UPDATE_NOTE and SET_TAG when updateTag is complete', () => {
       const note = {
         id: 1,
         text: 'text example',
@@ -211,11 +211,12 @@ describe('note actions', () => {
           note: {
             id: 1,
             text: 'text example',
-            tags: [ 'tag1', 'tag2' ]}
+            tags: [ 'tag1', 'tag2' ]},
+          tags: ['tag1', 'tag2']
         });
       const expectedActions = [
         { type: Constans.UPDATE_NOTE, payload:  {...note, tags: ['tag1', 'tag2']}},
-        { type: Constans.UPDATE_TAGS, payload: 'tag2' }
+        { type: Constans.SET_TAGS, payload: ['tag1', 'tag2'] }
       ];
       const middlewares = [ ReduxThunk.withExtraArgument({TagAPI}) ];
       const mockStore = configureMockStore(middlewares);

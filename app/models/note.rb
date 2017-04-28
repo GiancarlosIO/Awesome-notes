@@ -1,6 +1,7 @@
 class Note < ApplicationRecord
   belongs_to :user
-  has_many :tags
+  has_many :notes_tag
+  has_many :tags, through: :notes_tag
 
   def get_tags
     @tags = [];
