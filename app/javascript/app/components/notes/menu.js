@@ -66,7 +66,7 @@ export class Menu extends Component {
     const { email, notesCount, noteSelected } = this.props;
     return notesCount.length > 0 ?
       (
-        <div style={styles.base}>
+        <div style={styles.base} className="menu-note">
           <Icon
             type="info-circle"
             title="Show information of note selected"
@@ -77,7 +77,7 @@ export class Menu extends Component {
             title="Delete note"
             handleClick={this.handleDelete}
           />
-          <span style={styles.userEmail}>{email}</span>
+          <span className="menu-note-info" style={styles.userEmail}>{email}</span>
           { this.showNoteInfo() }
         </div>
       ) :
