@@ -5,3 +5,4 @@ json.note do
   json.updated_at @note.updated_at
   json.tags @note.get_tags
 end
+json.tags @tagsNotes

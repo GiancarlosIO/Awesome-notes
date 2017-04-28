@@ -1,5 +1,6 @@
 class Tag < ApplicationRecord
-  belongs_to :note
+  has_many :notes_tag
+  has_many :notes, through: :notes_tag
   validates :name, presence: true, uniqueness: true
 
   def self.create_with_array(tags = [], note_id)

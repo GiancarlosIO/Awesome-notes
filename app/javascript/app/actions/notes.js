@@ -132,8 +132,8 @@ export const updateTag = (tag_name, note_id) => {
       (response) => {
         const note = response.data.note;
         dispatch(updateNote(note))
-        dispatch(updateTags(tag_name));
-        // console.log('tag updated', response.data);
+        dispatch(setTags(response.data.tags));
+        console.log('tag updated', response.data);
       }
     ).catch((error) => {
       console.log('error to update tags', error);

@@ -12,6 +12,11 @@ class Api::V1::TagsController < Api::V1::MasterApiController
 
   def create
     if Tag.update_tags(tag_params[:tag_name], @note.id)
+      @notes = current_api_user.notes.reverse
+      @tags = @notes.map{|note| note.get_tags}.select{|t| t.length > 0}
+      @tagsNotes = [];
+      @tags.each{|t| t.each{|s| @tagsNotes << s } }
+      @tagsNotes.uniq!
       render template: 'api/v1/notes/show', status: 200
     else
       render json: { status: 'error', errors: 'error to update tag' }

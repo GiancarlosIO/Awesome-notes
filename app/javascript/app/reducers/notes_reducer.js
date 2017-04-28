@@ -64,9 +64,7 @@ export default function(state = initialState, action) {
     case UPDATE_TAGS:
       const tag_name = action.payload;
       let newTags = [...state.tags];
-      if (newTags.indexOf(tag_name) > -1) {
-        newTags = newTags.filter( tag => tag !== tag_name );
-      } else {
+      if (newTags.indexOf(tag_name) === -1) {
         newTags.push(tag_name);
       }
       return {
