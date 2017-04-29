@@ -53,7 +53,7 @@ const styles = {
   }
 }
 
-class TagNote extends Component {
+export class TagNote extends Component {
 
   state = {
     text: ''

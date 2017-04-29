@@ -24,7 +24,7 @@ export class AddNote extends Component {
 
   render() {
     return(
-      <div style={styles.base}>
+      <div id="add-note" style={styles.base}>
         <Icon type="plus" title="Add a new note" handleClick={this.handleClickIcon}/>
       </div>
     )

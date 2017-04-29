@@ -26,7 +26,7 @@ const styles = {
   }
 }
 
-const Note = ({id, text, handleSelectNote, selected}) => {
+export const Note = ({id, text, handleSelectNote, selected}) => {
   return (
     <div onClick={() => {handleSelectNote(id)}} style={[styles.base, selected && styles.selected]}>
       <span>

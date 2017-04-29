@@ -89,7 +89,7 @@ describe('selectors', () => {
         }
       });
     });
-    it('filter the notes first y search text and then by search tag', () => {
+    it('filter the notes first by search text and then by search tag', () => {
       const state = {
         ...initialState,
         notes: {
@@ -117,7 +117,7 @@ describe('selectors', () => {
       };
       expect(getFilteredNotesByTag(state)).to.eql({});
     });
-    it('just call one time the selector si the result is the same', () => {
+    it('just call one time the selector if the result is the same', () => {
       const state = {
         ...initialState,
         notes: {
