@@ -40,7 +40,9 @@ export const fetchNotesFromApi = () => {
         notes.forEach( note => objNotes[`${note.id}`] = note );
         const lastNote = objNotes[Object.keys(objNotes)[0]];
         dispatch(fetchNotes({notes: objNotes, tags: response.data.tags}));
-        dispatch(selectNote(lastNote.id));
+        if (response.data.notes.length > 0) {
+          dispatch(selectNote(lastNote.id));
+        }
         // console.log('fetch notes', response);
       },
       (error) => {

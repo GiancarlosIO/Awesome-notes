@@ -22,13 +22,13 @@ export const signupUser = ({ email, password, password_confirmation }) => {
   return (dispatch, getState, { AuthAPI }) => {
     return AuthAPI.signup(email, password, password_confirmation).request.then(
       (response) => {
-        //console.log('user register completed', response);
+        console.log('user register completed', response);
         setAuthApiHeaderConfig(response.headers, response.data.data);
-        dispatch(authUser());
         dispatch(setUserData(response.data.data));
+        dispatch(authUser());
       }).catch(
       (error) => {
-        //console.log('error to register', error.response)
+        console.log('error to register', error)
         dispatch(authError(error.response.data.errors.full_messages));
         return Promise.reject(error);
       }
