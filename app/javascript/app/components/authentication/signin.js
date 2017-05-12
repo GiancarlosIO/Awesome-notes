@@ -8,7 +8,7 @@ import Container from '../../grid/container';
 import Column from '../../grid/column';
 import { validateSiginForm } from './form_validations';
 import Button from '../../ui/buttons/button';
-import { signinUser } from '../../actions/auth-user';
+import { signinUser, setAuthLaoding } from '../../actions/auth-user';
 
 const styles = {
   base: {
@@ -51,16 +51,12 @@ const styles = {
 
 export class Signin extends Component {
 
-  state = {
-    loading: false
-  }
-
   onSubmit = (values, dispatch, formProps) => {
     console.log('submitting', values);
     this.setState({loading: true}, () => {
+      dispatch(setAuthLaoding(true));
       dispatch(signinUser(values))
-          .catch(() => { this.setState({loading: false}) });
-    })
+    });
   }
 
   renderErrors = () => {
@@ -94,7 +90,7 @@ export class Signin extends Component {
                 label="Password"
               />
               <div style={styles.buttonContainer}>
-                <Button type="submit" bg="secondary" disabled={ this.state.loading }>
+                <Button type="submit" bg="secondary" disabled={ this.props.loading }>
                   Sign in
                 </Button>
               </div>
@@ -115,7 +111,8 @@ const SigininFormConfigured = reduxForm({
 
 function mapStateToProps(state) {
   return {
-    errors: state.auth.errors
+    errors: state.auth.errors,
+    loading: state.auth.loading
   }
 }
 

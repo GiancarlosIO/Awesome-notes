@@ -2,7 +2,8 @@ import {
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
-  SET_USER_DATA
+  SET_USER_DATA,
+  SET_AUTH_LOADING
 } from '../constants/';
 import {
   resetAuthApiHeaderConfig,
@@ -14,6 +15,7 @@ export const authUser = () => ({ type: AUTH_USER });
 export const authError = (error) => ({ type: AUTH_ERROR, payload: error });
 export const unauthUser = () => ({ type: UNAUTH_USER });
 export const setUserData = (userData) => ({ type: SET_USER_DATA, payload: userData });
+export const setAuthLaoding = (loading) => ({ type: SET_AUTH_LOADING, payload: loading })
 
 // async actions
 
@@ -26,11 +28,12 @@ export const signupUser = ({ email, password, password_confirmation }) => {
         setAuthApiHeaderConfig(response.headers, response.data.data);
         dispatch(setUserData(response.data.data));
         dispatch(authUser());
+        dispatch(setAuthLaoding(false));
       }).catch(
       (error) => {
         // console.log('error to register', error.response)
+        dispatch(setAuthLaoding(false));
         dispatch(authError(error.response.data.errors.full_messages));
-        return Promise.reject(error);
       }
     )
   }
@@ -41,17 +44,18 @@ export const signinUser = ({email, password}) => {
   return (dispatch, getState, { AuthAPI }) => {
     return AuthAPI.signin(email, password).request.then(
       (response) => {
-        //console.log('sign in user', response);
+        console.log('sign in user', response);
         resetAuthApiHeaderConfig();
         setAuthApiHeaderConfig(response.headers, response.data.data);
-        dispatch(authUser());
         dispatch(setUserData(response.data.data));
+        dispatch(authUser());
+        dispatch(setAuthLaoding(false));
       }
     ).catch(
       ( error ) => {
-        //console.log('error to signin', error.response);
+        console.log('error to signin', error);
+        dispatch(setAuthLaoding(false));
         dispatch(authError(error.response.data.errors));
-        return Promise.reject();
       }
     )
   }

@@ -9,7 +9,7 @@ import RenderField from './render_field';
 import Button from '../../ui/buttons/button';
 import Header from '../navigation/header';
 import {Redirect} from 'react-router-dom';
-import { signupUser } from '../../actions/auth-user';
+import { signupUser, setAuthLaoding } from '../../actions/auth-user';
 
 const styles = {
   base: {
@@ -52,16 +52,12 @@ const styles = {
 
 export class Signup extends Component {
 
-  state = {
-    loading: false
-  }
-
   onSubmit = (values, dispatch, formProps) => {
     console.log('submitting', values);
     this.setState({loading: true}, () => {
+      dispatch(setAuthLaoding(true));
       dispatch(signupUser(values))
-        .catch(() => this.setState({loading: false}));
-    })
+    });
   }
 
   renderErrors = () => {
@@ -101,7 +97,7 @@ export class Signup extends Component {
                 label="Passsword confirmation"
               />
               <div style={styles.buttonContainer}>
-                <Button type="submit" bg="primary" disabled={ this.state.loading }>
+                <Button type="submit" bg="primary" disabled={ this.props.loading }>
                   Register
                 </Button>
               </div>
@@ -120,7 +116,8 @@ const SignupFormConfigured = reduxForm({
 
 function mapStateToProps(state) {
   return {
-    errors: state.auth.errors
+    errors: state.auth.errors,
+    loading: state.auth.loading
   }
 }
 
