@@ -1,6 +1,7 @@
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const SET_AUTH_LOADING = 'SET_AUTH_LOADING';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const FETCH_NOTES = 'FETCH_NOTES';
 export const ADD_NOTE = 'ADD_NOTE';
